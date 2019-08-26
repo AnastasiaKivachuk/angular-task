@@ -1,0 +1,29 @@
+<div class="headerWrap row">
+    <div class="col-md-2">
+      <h1>LOGO</h1>
+    </div>
+    <div class="col-md-2 offset-4">
+
+        <a class="add-quastion-btn" href="/create-new-question">
+          <i class="fa fa-plus"></i>Add quastion
+        </a>
+
+    </div>
+    <div class="col-md-4">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item" *ngIf="authService.userData as user">
+              <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
+              alt="{{user.displayName}}">
+              <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
+            </li>
+            <li class="nav-item hideLi">
+              <a class="nav-link" (click)="authService.SignOut()">
+                <i class="fa fa-sign-out-alt"></i>Log out
+              </a>
+            </li>
+          </ul>
+        </div>
+
+    </div>
+  </div>

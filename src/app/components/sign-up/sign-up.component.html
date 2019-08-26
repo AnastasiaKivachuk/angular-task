@@ -1,0 +1,43 @@
+  <div class="headerWrap row">
+      <div class="col-md-2">
+    <h1>LOGO</h1></div>
+    <div class="col-md-2 offset-8">
+    <a href="/sign-in" class="login">Login</a>
+    </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="formWrap col-md-6">
+            <div class="row justify-content-center">
+              <div class="logoIcon"></div>
+            </div>
+            <div class="row justify-content-center">
+                <h5 class="signUp">Sign Up</h5>
+              </div>
+          <form>
+            <div class="form-group col-md-10 offset-1">
+              <label for="exampleInputUser">Email</label>
+              <input type="email"  class="form-control" placeholder="Email Address" #userEmail required>
+               </div>
+            <div class="form-group col-md-10 offset-1">
+              <label for="exampleInputPassword">Password</label>
+              <input type="password" class="form-control"  placeholder="Password" #userPwd required>
+            </div>
+            <div class="socialBtn col-md-10 offset-1">
+                <button type="button" class="btn facebookBtn" (click)="authService.FacebookAuth()">
+                    <i class="fa fa-facebook"></i>
+                    Facebook
+                  </button>
+                  <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
+                      <i class="fa fa-google"></i>
+                     Google
+                    </button>
+                    <button type="button" class="btn githubBtn" (click)="authService.GithubAuth()">
+                        <i class="fa fa-github"></i>
+                       Github
+                      </button>
+            </div>
+            <input type="button" class="btn btn-primary col-md-4 offset-4 signUpBtn" value="Sign Up" (click)="authService.SignUp(userEmail.value, userPwd.value)">
+          </form>
+        </div>
+        </div>
