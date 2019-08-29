@@ -1,8 +1,7 @@
 import { Component, OnInit, NgZone  } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
-
-
+import { OtherService } from "../../shared/services/other.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +13,22 @@ export class DashboardComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    public otherService: OtherService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {this.getQuestion(); }
 
+
+  openEdit(){
+  this.otherService.openEdit();
+}
+
+allQuestions;
+getQuestion = () =>{
+   this.otherService
+   .getQuestion()
+   .subscribe(res =>(this.allQuestions = res));
+}
 }
 

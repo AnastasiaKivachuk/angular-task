@@ -1,9 +1,12 @@
-export class Question {
-  qid: string;
+export interface Question {
   title: string;
   text: string;
-  HTML: boolean = true;
+  author: string;
+  HTML: boolean;
   CSS: boolean;
   JS: boolean;
-  date: Date = new Date();
+  date: Date;
+  isApproved;
+  isAnswered;
+  comments: []
 }

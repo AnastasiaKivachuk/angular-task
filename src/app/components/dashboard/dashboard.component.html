@@ -1,14 +1,28 @@
 <app-header></app-header>
-
-
-
-
 <app-filters></app-filters>
-
 <main role="main" class="row">
-    <div class="question col-md-3">
-  <app-list-of-questions></app-list-of-questions>
+    <div class="question col-md-3" (click)=openEdit() *ngFor="let question of allQuestions">
+        <div  >
+            <h2 class="title-list-question">{{ question.payload.doc.data().title }}</h2>
+            <div class="second-line">
+            <span class="date-list-question">{{ question.payload.doc.data().date.seconds * 1000 | date:'MM-dd-yyyy' }}</span>
+            <span class="tags-list-question">{{ (question.payload.doc.data().HTML)?'HTML/  ': ""}}</span>
+            <span class="tags-list-question">{{ (question.payload.doc.data().CSS)?'CSS/  ': ""}}</span>
+            <span class="tags-list-question">{{ (question.payload.doc.data().JS)?'JS/  ': ""}}</span>
+          </div>
+          <div class="row buttons">
+            <a class="button-list-question" (click)="otherService.Approve()">
+              <i class="fa fa-check"></i>Approve
+            </a>
+            <a class="button-list-question" (click)="otherService.deleteQuestion()">
+              <i class="fa fa-trash-o"></i>Delete
+            </a>
+          </div>
+          </div>
+  <!-- <app-list-of-questions ></app-list-of-questions> -->
 </div>
+
+
 </main>
 
-
+<a class="add-question-circle" href="/create-new-question"><i class="fa fa-plus"></i></a>

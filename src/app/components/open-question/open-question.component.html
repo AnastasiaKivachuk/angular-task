@@ -1,0 +1,82 @@
+<div class="headerWrap row">
+  <div class="col-md-2">
+    <h1>LOGO</h1>
+  </div>
+  <div class="col-md-2 offset-4">
+
+    <a class="add-quastion-btn" href="/create-new-question">
+      <i class="fa fa-plus"></i>Add quastion
+    </a>
+
+  </div>
+  <div class="col-md-4">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <li class="nav-item" *ngIf="authService.userData as user">
+          <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
+            alt="{{user.displayName}}">
+          <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
+        </li>
+        <li class="nav-item hideLi">
+          <a class="nav-link" (click)="authService.SignOut()">
+            <i class="fa fa-sign-out-alt"></i>Log out
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-md-6 offset-3 new-question">
+  <div class="header-question">
+    <div class="author-question">author</div>
+    <h2 class="title-question">TITLE</h2>
+    <div class="date-question">date</div>
+  </div>
+  <hr align="center" width="80%" size="4" color="black" />
+  <div class="description">
+    ewregfrewedfrtgfh
+  </div>
+
+  <div class="header-question ">
+    <div>
+
+      <span class="tags-list-question">HTML/ </span>
+      <span class="tags-list-question">CSS/ </span>
+      <span class="tags-list-question">JS/ </span>
+    </div>
+    <div class="buttons">
+
+      <a class="button-list-question" (click)="otherService.Approve()">
+        <i class="fa fa-check"></i>Approve
+      </a>
+      <a class="button-list-question" (click)="otherService.Edit()">
+        <i class="fa fa-paint-brush"></i>Edit
+      </a>
+      <a class="button-list-question" (click)="otherService.deleteQuestion()">
+        <i class="fa fa-trash-o"></i>Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-6 offset-3 comments-question">
+
+  <span>Comments/Answers</span>
+  <div class="all-comments">
+    <div class="comment">
+      <div>
+      <div class="author"></div>
+      <div class="text-comment">sdfghjk,jmhngfdsa</div>
+    </div>
+      <div>
+        <div>date</div>
+        <input type="checkbox" class="form-check-input" id="resolve"/>
+       <label for="resolve">resolve</label>
+      </div>
+    </div>
+  </div>
+
+</div>

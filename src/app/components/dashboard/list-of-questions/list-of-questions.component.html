@@ -1,12 +1,14 @@
 
-<div  *ngFor="let question of questions">
-  <h2 class="title-list-question">{{other.payload.doc.data().title}}</h2>
+<div >
+  <h2 class="title-list-question">{{ question.payload.doc.data().title }}</h2>
   <div class="second-line">
-  <span class="date-list-question">Date</span>
-  <span class="tags-list-question">tag/tag</span>
+  <span class="date-list-question">{{ question.payload.doc.data().date }}</span>
+  <span class="tags-list-question">{{ (question.payload.doc.data().HTML)?'HTML/  ': ""}}</span>
+  <span class="tags-list-question">{{ (question.payload.doc.data().CSS)?'CSS/  ': ""}}</span>
+  <span class="tags-list-question">{{ (question.payload.doc.data().JS)?'JS/  ': ""}}</span>
 </div>
 <div class="row buttons">
-  <a class="button-list-question" (click)="authService.Approve()">
+  <a class="button-list-question" (click)="otherService.Approve()">
     <i class="fa fa-check"></i>Approve
   </a>
   <a class="button-list-question" (click)="otherService.deleteQuestion()">
