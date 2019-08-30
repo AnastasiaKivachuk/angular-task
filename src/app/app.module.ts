@@ -15,10 +15,8 @@ import {AuthService} from './shared/services/auth.service';
 import {OtherService} from './shared/services/other.service';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { FiltersComponent } from './components/dashboard/filters/filters.component';
-import { ListOfQuestionsComponent } from './components/dashboard/list-of-questions/list-of-questions.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
 import { HeaderComponent } from './components/dashboard/header/header.component';
-import { HeaderQuestionComponent } from './components/create-question/header-question/header-question.component';
 import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
@@ -27,16 +25,13 @@ import { OpenQuestionComponent } from './components/open-question/open-question.
 @NgModule({
   declarations: [
     AppComponent,
-    // RegisterComponent,
     SignInComponent,
     SignUpComponent,
     DashboardComponent,
     VerifyEmailComponent,
-    FiltersComponent,
-    ListOfQuestionsComponent,
+    FiltersComponent,,
     CreateQuestionComponent,
     HeaderComponent,
-    HeaderQuestionComponent,
     EditQuestionComponent,
     OpenQuestionComponent
   ],

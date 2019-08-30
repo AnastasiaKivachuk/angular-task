@@ -42,16 +42,3 @@ addQuestion(form: NgForm){
 
 }
 
-// addNewQuestion(form: NgForm) {
-//   const newQuestion: Question = {
-//     title: form.value.title,
-//     description: form.value.description,
-//     categories: form.value.categories,
-//     author: this.user.name,
-//     date: new Date(),
-//     isApproved: false,
-//     isAnswered: false,
-//     comments: []
-//   };
-//   this.qService.addQuestionOnConfirmation(newQuestion);
-// }

@@ -16,7 +16,6 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent },
   { path: 'register-user', component: SignUpComponent },
   { path: 'dashboard', component: DashboardComponent },
-  // { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-email-address', component: VerifyEmailComponent },
   { path: 'create-new-question', component: CreateQuestionComponent },
   { path: 'edit-question', component: EditQuestionComponent },
