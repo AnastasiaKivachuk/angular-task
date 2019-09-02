@@ -29,7 +29,7 @@ import { OpenQuestionComponent } from './components/open-question/open-question.
     SignUpComponent,
     DashboardComponent,
     VerifyEmailComponent,
-    FiltersComponent,,
+    FiltersComponent,
     CreateQuestionComponent,
     HeaderComponent,
     EditQuestionComponent,

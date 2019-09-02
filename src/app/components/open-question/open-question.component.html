@@ -13,7 +13,7 @@
     <div class="sidebar-sticky">
       <ul class="nav flex-column">
         <li class="nav-item" *ngIf="authService.userData as user">
-          <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : '/assets/dummy-user.png'}}"
+          <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}"
             alt="{{user.displayName}}">
           <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
         </li>
@@ -33,6 +33,7 @@
     <div class="author-question">author</div>
     <h2 class="title-question">TITLE</h2>
     <div class="date-question">date</div>
+    <i class="fa fa-close close" (click)="otherService.GoToHome()"></i>
   </div>
   <hr align="center" width="80%" size="4" color="black" />
   <div class="description">
@@ -48,19 +49,33 @@
     </div>
     <div class="buttons">
 
-      <a class="button-list-question" (click)="otherService.Approve()">
+      <a *ngIf="JSON.parse(localStorage.getItem('user')).isAdmin===true" class="button-list-question" (click)="otherService.Approve()">
         <i class="fa fa-check"></i>Approve
       </a>
       <a class="button-list-question" (click)="otherService.Edit()">
         <i class="fa fa-paint-brush"></i>Edit
       </a>
-      <a class="button-list-question" (click)="otherService.deleteQuestion()">
+      <a *ngIf="JSON.parse(localStorage.getItem('user')).isAdmin===false" class="button-list-question" (click)="otherService.deleteQuestion()">
         <i class="fa fa-trash-o"></i>Delete
       </a>
     </div>
   </div>
 </div>
 
+
+<div class="col-md-6 offset-3 comments-question">
+
+    <form #f="ngForm" (ngSubmit)="addQuestion(f)" novalidate>
+      <div class="form-group col-md-10 offset-1">
+        <label>Add comment</label>
+        <textarea type="text" class="form-control" placeholder="Comment" name="comments"  ngModel  #text="ngModel"  required></textarea>
+      </div>
+        <div class="row buttons-form">
+          <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK" >
+          <input type="button" class="btn btn-primary col-md-4 offset-4 button-form" value="Cancel" type="reset">
+        </div>
+    </form>
+  </div>
 
 <div class="col-md-6 offset-3 comments-question">
 

@@ -2,6 +2,9 @@ import { Component, OnInit, NgZone  } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import { OtherService } from "../../shared/services/other.service";
+import { Question } from '../../shared/services/question';  // Student data type interface class
+import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';  // Firebase modules for Database, Data list and Single object
+
 
 @Component({
   selector: 'app-dashboard',
@@ -17,11 +20,13 @@ export class DashboardComponent implements OnInit {
     public otherService: OtherService
   ) { }
 
-  ngOnInit() {this.getQuestion(); }
+  ngOnInit() {this.getQuestion();
+   }
 
 
-  openEdit(){
-  this.otherService.openEdit();
+  openQuestion(){
+  this.otherService.openQuestion();
+// console.log(question.payload.doc.data().id);
 }
 
 allQuestions;

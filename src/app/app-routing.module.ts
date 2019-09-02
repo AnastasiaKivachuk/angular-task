@@ -13,13 +13,13 @@ import {EditQuestionComponent} from './components/edit-question/edit-question.co
 import {OpenQuestionComponent} from './components/open-question/open-question.component';
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
-  { path: 'sign-in', component: SignInComponent },
-  { path: 'register-user', component: SignUpComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'verify-email-address', component: VerifyEmailComponent },
-  { path: 'create-new-question', component: CreateQuestionComponent },
-  { path: 'edit-question', component: EditQuestionComponent },
-  { path: 'open-question', component: OpenQuestionComponent }
+  { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]  },
+  { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
+  { path: 'create-new-question', component: CreateQuestionComponent, canActivate: [AuthGuard] },
+  { path: 'edit-question/:id', component: EditQuestionComponent, canActivate: [AuthGuard] },
+  { path: 'open-question/:id', component: OpenQuestionComponent, canActivate: [AuthGuard] }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

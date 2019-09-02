@@ -7,7 +7,7 @@ import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {database} from "firebase/app";
 import { FormControl, FormGroup } from "@angular/forms";
 import {ActivatedRoute} from '@angular/router';
-import { from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -27,10 +27,13 @@ export class OtherService {
     return new Promise<any>((resolve, reject) => {
       this.firestore
         .collection("questions")
-        .add(question)
+        .add(question).then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+      })
         .then(res => {this.router.navigate(['dashboard']);
           }, err => reject(err));
     });
+
   }
 
   // updateQuestion(question: Question) {
@@ -47,6 +50,14 @@ export class OtherService {
 
   }
 
+  // getQuestionId(questionId:number){
+  //  this.questionId = this.route.params.pipe(take(1)).subscribe(params => {
+  //     this.id = params.id;
+  //     this.firestore.doc(`dashboard/${this.id}`).get().subscribe(data => {
+  //       this.question = {...data.data(), id: this.id} as Question;
+  //     });
+  // }
+
   // deleteQuestion(question: Question) {
   //   return this.firestore
   //     .collection("questions")
@@ -59,7 +70,7 @@ export class OtherService {
       this.router.navigate(['dashboard']);
     }
 
-    openEdit(){
+    openQuestion(){
       this.router.navigate(['open-question']);
     }
 
