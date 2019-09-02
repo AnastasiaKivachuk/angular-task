@@ -24,10 +24,10 @@ export class DashboardComponent implements OnInit {
    }
 
 
-  openQuestion(){
-  this.otherService.openQuestion();
-// console.log(question.payload.doc.data().id);
-}
+//   openQuestion(){
+//   this.otherService.openQuestion();
+// // console.log(question.payload.doc.data().id);
+// }
 
 allQuestions;
 getQuestion = () =>{
@@ -35,5 +35,10 @@ getQuestion = () =>{
    .getQuestion()
    .subscribe(res =>(this.allQuestions = res));
 }
+
+deleteQuestion(question){
+  this.otherService.deleteQuestion(question);
 }
+}
+
 

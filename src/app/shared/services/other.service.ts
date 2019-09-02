@@ -56,23 +56,28 @@ export class OtherService {
   //     this.firestore.doc(`dashboard/${this.id}`).get().subscribe(data => {
   //       this.question = {...data.data(), id: this.id} as Question;
   //     });
-  // }
+  // }}
 
   // deleteQuestion(question: Question) {
   //   return this.firestore
   //     .collection("questions")
-  //     .doc(data.payload.doc.id)
+  //     .doc(question.payload.doc.id)
   //     .delete();
   // }
-
+  deleteQuestion(question: Question) {
+    this.firestore
+      .collection('questions')
+      .doc(question.id)
+      .delete();
+  }
 
   GoToHome(){
       this.router.navigate(['dashboard']);
     }
 
-    openQuestion(){
-      this.router.navigate(['open-question']);
-    }
+    // openQuestion(){
+    //   this.router.navigate(['/open-question', id]);
+    // }
 
 
 

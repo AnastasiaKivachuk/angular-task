@@ -3,8 +3,7 @@
 <main role="main" class="row">
     <div class="question col-md-3" *ngFor="let question of allQuestions">
         <div>
-            <!-- [routerLink]="['/open-question', question.payload.doc.data().id]" -->
-            <a [routerLink]="['/open-question', question.payload.doc.id]" class="title-list-question pointer" (click)=openQuestion()>{{ question.payload.doc.data().title }}</a>
+            <a [routerLink]="['/open-question', question.payload.doc.id]" class="title-list-question pointer">{{ question.payload.doc.data().title }}</a>
             <div class="second-line">
             <span class="date-list-question">{{ question.payload.doc.data().date.seconds * 1000 | date:'MM-dd-yyyy' }}</span>
             <span class="tags-list-question">{{ (question.payload.doc.data().HTML)?'HTML/  ': ""}}</span>

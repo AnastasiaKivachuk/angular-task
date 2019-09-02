@@ -8,5 +8,6 @@ export interface Question {
   date: Date;
   isApproved;
   isAnswered;
-  comments: []
+  comments: [],
+  id?: string;
 }

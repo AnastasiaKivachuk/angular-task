@@ -27,28 +27,28 @@
   <form #f="ngForm" (ngSubmit)="addQuestion(f)" novalidate>
     <div class="form-group col-md-10 offset-1">
       <label>Title</label>
-      <input type="text" class="form-control" placeholder="Title" name="title" ngModel #title="ngModel" required>
+      <input type="text" class="form-control" placeholder="Title" name="title" ngModel #title="ngModel" ngModel="{{question.title}}" required>
     </div>
     <div class="form-group col-md-10 offset-1">
       <label>Text</label>
-      <textarea type="text" class="form-control" placeholder="Text" name="text"  ngModel  #text="ngModel"  required></textarea>
+      <textarea type="text" class="form-control" placeholder="Text" name="text"  ngModel  ngModel="{{question.text}}" #text="ngModel"  required></textarea>
     </div>  <div class="row">
     <div class="tags">
         <label>Tags: </label>
       </div>
         <div>
           <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="HTML"  ngModel name="HTML" value="HTML"  #HTML="ngModel">
+              <input type="checkbox" class="form-check-input" id="HTML"  ngModel="{{question.HTML}}"  ngModel name="HTML" value="HTML"  #HTML="ngModel">
             <label class="form-check-label" for="HTML">HTML</label>
 
           </div>
           <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="CSS"  ngModel name="CSS" value="CSS"  #CSS="ngModel">
+              <input type="checkbox" class="form-check-input" id="CSS"  ngModel="{{question.CSS}}" ngModel name="CSS" value="CSS"  #CSS="ngModel">
             <label class="form-check-label" for="CSS">CSS</label>
 
           </div>
           <div class="form-check">
-              <input type="checkbox" class="form-check-input" id="JS"   ngModel name="JS" value="JS"  #JS="ngModel">
+              <input type="checkbox" class="form-check-input" id="JS"  ngModel="{{question.JS}}"  ngModel name="JS" value="JS"  #JS="ngModel">
             <label class="form-check-label" for="JS">JS</label>
           </div>
         </div>
