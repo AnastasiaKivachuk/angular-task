@@ -52,11 +52,11 @@ export class EditQuestionComponent implements OnInit {
     HTML: form.value.HTML,
     CSS: form.value.CSS,
     JS: form.value.JS,
-      // id: this.id
+    id: this.route.snapshot.paramMap.get("id")
     };
-    console.log(question);
+    console.log(question.id);
     this.otherService.updateQuestion(question);
     console.log(question);
-    this.router.navigate([`/open-question/${this.id}`]);
+    this.router.navigate([`/open-question/${question.id}`]);
   }
 }

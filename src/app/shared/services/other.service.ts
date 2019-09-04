@@ -48,7 +48,8 @@ export class OtherService {
 //         CSS: question.CSS,
 //         JS: question.JS});
 // console.log(question.id);
-
+console.log(question);
+console.log(question.id);
 return this.firestore.collection("questions").doc(question.id).update({
   title: question.title,
           text: question.text,

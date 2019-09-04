@@ -24,7 +24,7 @@
 
 <div class="col-md-6 offset-3 new-question">
   <h2 class="title-list-question">Edit question</h2>
-  <form #f="ngForm" (ngSubmit)="updateQuestion(f)" novalidate>
+  <form #f="ngForm" (ngSubmit)="updateQuestion(f)"  *ngIf="question" novalidate>
     <div class="form-group col-md-10 offset-1">
       <label>Title</label>
       <input type="text" class="form-control" placeholder="Title" name="title" ngModel #title="ngModel" ngModel="{{question.title}}" required>
