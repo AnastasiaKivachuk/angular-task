@@ -36,12 +36,33 @@ export class OtherService {
 
   }
 
-  // updateQuestion(question: Question) {
-  //   return this.firestore
-  //     .collection("questions")
-  //     .doc(question.payload.doc.id)
-  //     .set({ completed: true }, { merge: true });
-  // }
+  updateQuestion(question) {
+
+//     this.firestore
+//       .collection("questions")
+//       .doc(question.id)
+//       .update({
+//         title: question.title,
+//         text: question.text,
+//         HTML: question.HTML,
+//         CSS: question.CSS,
+//         JS: question.JS});
+// console.log(question.id);
+
+return this.firestore.collection("questions").doc(question.id).update({
+  title: question.title,
+          text: question.text,
+          HTML: question.HTML,
+          CSS: question.CSS,
+          JS: question.JS
+})
+.then(function() {
+    console.log("Document successfully updated!");
+})
+.catch(function(error) {
+    console.error("Error updating document: ", error);
+});
+  }
 
 
   getQuestion() {
@@ -50,34 +71,31 @@ export class OtherService {
 
   }
 
-  // getQuestionId(questionId:number){
-  //  this.questionId = this.route.params.pipe(take(1)).subscribe(params => {
-  //     this.id = params.id;
-  //     this.firestore.doc(`dashboard/${this.id}`).get().subscribe(data => {
-  //       this.question = {...data.data(), id: this.id} as Question;
-  //     });
-  // }}
 
-  // deleteQuestion(question: Question) {
-  //   return this.firestore
-  //     .collection("questions")
-  //     .doc(question.payload.doc.id)
-  //     .delete();
-  // }
-  deleteQuestion(question: Question) {
-    this.firestore
-      .collection('questions')
-      .doc(question.id)
-      .delete();
-  }
+
+    deleteQuestion(question) {
+    this.firestore.collection("questions").doc(question.payload.doc.id).delete().then(function() {
+      console.log("Document successfully deleted!");
+  }).catch(function(error) {
+      console.error("Error removing document: ", error);
+  });
+      }
+
+
+      deleteQuestion2(question) {
+        this.firestore.collection("questions").doc(question.id).delete().then(function() {
+          console.log("Document successfully deleted!");
+
+      }).catch(function(error) {
+          console.error("Error removing document: ", error);
+      });
+          }
+
+
 
   GoToHome(){
       this.router.navigate(['dashboard']);
     }
-
-    // openQuestion(){
-    //   this.router.navigate(['/open-question', id]);
-    // }
 
 
 

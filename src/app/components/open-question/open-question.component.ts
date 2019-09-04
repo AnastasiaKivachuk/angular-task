@@ -36,10 +36,11 @@ export class OpenQuestionComponent implements OnInit {
 
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;})
-// console.log(questionId);
-
-
 }
 
+deleteQuestion(question){
+  this.otherService.deleteQuestion2(question);
+  this.router.navigate(['dashboard']);
+}
 
 }

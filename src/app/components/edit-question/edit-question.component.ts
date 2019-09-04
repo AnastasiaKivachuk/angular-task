@@ -22,6 +22,7 @@ export class EditQuestionComponent implements OnInit {
   // loadingSub: Subscription;
   user: User;
   visibility = false;
+  form: NgForm;
 
   constructor(
     public otherService: OtherService,
@@ -39,4 +40,23 @@ export class EditQuestionComponent implements OnInit {
           this.question = {...data.data(), id: questionId} as Question;})
   }
 
+  // updateQuestion(question){
+  //   this.otherService.updateQuestion(question);
+  //   this.router.navigate(['dashboard']);
+  // }
+
+  updateQuestion(form: NgForm) {
+    const question: Question = {
+    title: form.value.title,
+    text: form.value.text,
+    HTML: form.value.HTML,
+    CSS: form.value.CSS,
+    JS: form.value.JS,
+      // id: this.id
+    };
+    console.log(question);
+    this.otherService.updateQuestion(question);
+    console.log(question);
+    this.router.navigate([`/open-question/${this.id}`]);
+  }
 }
