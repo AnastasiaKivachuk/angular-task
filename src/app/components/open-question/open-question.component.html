@@ -29,7 +29,7 @@
 </div>
 
 
-<div class="col-md-6 offset-3 new-question">
+<div class="col-md-6 offset-3 new-question" *ngIf="question">
   <div class="header-question">
     <div class="author-question">{{question.author}}</div>
     <h2 class="title-question">{{ question.title}}</h2>
@@ -41,7 +41,7 @@
     {{question.text}}
   </div>
 
-  <div class="header-question ">
+  <div class="header-question " >
     <div>
 
       <span class="tags-list-question">{{ (question.HTML)?'HTML/  ': ""}}</span>
@@ -50,7 +50,7 @@
     </div>
     <div class="buttons">
 
-      <a  class="button-list-question" (click)="otherService.Approve()">
+      <a  class="button-list-question" (click)="approveQuestion(question)">
         <i class="fa fa-check"></i>Approve
       </a>
       <a class="button-list-question" [routerLink]="['/edit-question', question.id]">
@@ -66,10 +66,10 @@
 
 <div class="col-md-6 offset-3 comments-question">
 
-    <form #f="ngForm" (ngSubmit)="addQuestion(f)" novalidate>
+    <form #f="ngForm" (ngSubmit)="addNewComment(f)" novalidate>
       <div class="form-group col-md-10 offset-1">
         <label>Add comment</label>
-        <textarea type="text" class="form-control" placeholder="Comment" name="comments"  ngModel  #text="ngModel"  required></textarea>
+        <textarea type="text" class="form-control" placeholder="Comment" name="comments"  ngModel  #comments="ngModel"></textarea>
       </div>
         <div class="row buttons-form">
           <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK" >
@@ -84,11 +84,11 @@
   <div class="all-comments">
     <div class="comment">
       <div>
-      <div class="author"></div>
-      <div class="text-comment">sdfghjk,jmhngfdsa</div>
+      <div class="author">{{comments.author}}</div>
+      <div class="text-comment">{{comments.textComments}}</div>
     </div>
       <div>
-        <div>date</div>
+        <div>{{comments.date}}</div>
         <input type="checkbox" class="form-check-input" id="resolve"/>
        <label for="resolve">resolve</label>
       </div>

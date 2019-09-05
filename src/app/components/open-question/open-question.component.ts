@@ -3,6 +3,7 @@ import { OtherService } from "../../shared/services/other.service";
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import {Question} from "../../shared/services/question";
+import {Comments} from "../../shared/services/question";
 import {User} from "../../shared/services/user";
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
@@ -35,7 +36,8 @@ export class OpenQuestionComponent implements OnInit {
     let questionId=this.route.snapshot.paramMap.get("id");
 
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
-          this.question = {...data.data(), id: questionId} as Question;})
+          this.question = {...data.data(), id: questionId} as Question;
+      });
 }
 
 deleteQuestion(question){
@@ -43,4 +45,39 @@ deleteQuestion(question){
   this.router.navigate(['dashboard']);
 }
 
+
+
+
+// updateQuestion(form: NgForm) {
+//   const question: Question = {
+//   comments: form.value.comments,
+
+//   id: this.route.snapshot.paramMap.get("id")
+//   };
+//   console.log(question.id);
+//   this.otherService.updateQuestion(question);
+//   console.log(question);
+//   this.router.navigate([`/open-question/${question.id}`]);
+// }
+
+approveQuestion(question) {
+  this.otherService.approveQuestion(question);
+  this.question.isApproved = true;
+  this.router.navigate(['dashboard']);
+}
+
+addNewComment(form: NgForm) {
+  const newComment: Comments = {
+    textComment: form.value.comments,
+    author: JSON.parse(localStorage.getItem('user')).email,
+    date: new Date(),
+    isResolved: false
+  };
+  this.question.comments.push(newComment);
+  // const comments = this.question.comments;
+  // const id=this.route.snapshot.paramMap.get("id");
+
+  this.otherService.addCommentToQuestion(this.question.comments, this.route.snapshot.paramMap.get("id"));
+  this.router.navigate(['dashboard']);
+}
 }

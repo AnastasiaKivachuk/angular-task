@@ -12,7 +12,7 @@
           </div>
           <div class="row buttons">
               <!-- *ngIf="JSON.parse(localStorage.getItem('user')).isAdmin" -->
-            <a  class="button-list-question" (click)="otherService.Approve()">
+            <a  class="button-list-question" (click)="approveQuestion2(question)">
               <i class="fa fa-check"></i>Approve
             </a>
             <a class="button-list-question" (click)="deleteQuestion(question)">

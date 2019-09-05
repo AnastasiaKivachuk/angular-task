@@ -38,6 +38,7 @@ export class EditQuestionComponent implements OnInit {
 
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;})
+
   }
 
   // updateQuestion(question){

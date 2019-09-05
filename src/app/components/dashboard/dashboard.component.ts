@@ -12,7 +12,9 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
   styleUrls: ['./dashboard.component.sass']
 })
 export class DashboardComponent implements OnInit {
-
+  id: string;
+  // private subId: Subscription;
+  question: Question;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -38,6 +40,10 @@ getQuestion = () =>{
 
 deleteQuestion(question){
   this.otherService.deleteQuestion(question);
+}
+
+approveQuestion2(question) {
+  this.otherService.approveQuestion2(question);
 }
 }
 

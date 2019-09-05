@@ -8,6 +8,13 @@ export interface Question {
   date?: Date;
   isApproved?;
   isAnswered?;
-  comments?: [],
+  comments?: Comments[],
   id?: string;
+}
+
+export interface Comments {
+  textComment: string;
+  author?: string;
+  date?: Date;
+  isResolved?: boolean;
 }
