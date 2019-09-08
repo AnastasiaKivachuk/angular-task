@@ -23,13 +23,10 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit() {this.getQuestion();
+    // this.authService.getAdmin();
+    console.log(JSON.parse(localStorage.getItem('user')));
    }
 
-
-//   openQuestion(){
-//   this.otherService.openQuestion();
-// // console.log(question.payload.doc.data().id);
-// }
 
 allQuestions;
 getQuestion = () =>{

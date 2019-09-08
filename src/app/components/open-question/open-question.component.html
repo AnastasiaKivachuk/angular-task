@@ -18,6 +18,9 @@
           <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
         </li>
         <li class="nav-item hideLi">
+          <a class="nav-link" (click)="authService.UserProfile()">
+            <i class="fa fa-sign-out-alt"></i>User Profile
+          </a>
           <a class="nav-link" (click)="authService.SignOut()">
             <i class="fa fa-sign-out-alt"></i>Log out
           </a>
@@ -50,13 +53,17 @@
     </div>
     <div class="buttons">
 
-      <a  class="button-list-question" (click)="approveQuestion(question)">
+      <a  class="button-list-question" (click)="approveQuestion(question)"  [hidden]="question.isApproved">
         <i class="fa fa-check"></i>Approve
       </a>
-      <a class="button-list-question" [routerLink]="['/edit-question', question.id]">
+      <span class="tags-list-question">{{ authService.userData.isAdmin }}</span>
+      <a class="button-list-question" [routerLink]="['/edit-question', question.id]" *ngIf="authService.userData.email == question.author">
         <i class="fa fa-paint-brush"></i>Edit
       </a>
-      <a class="button-list-question" (click)="deleteQuestion(question)">
+      <!-- *ngIf="authService.userData.isAdmin" -->
+      <!-- [hidden]="question.isApproved" -->
+      <!-- *ngIf="question.isApproved" -->
+      <a class="button-list-question" (click)="deleteQuestion(question)" [hidden]="question.isApproved" >
         <i class="fa fa-trash-o"></i>Delete
       </a>
     </div>
@@ -78,18 +85,18 @@
     </form>
   </div>
 
-<div class="col-md-6 offset-3 comments-question">
+<div class="col-md-6 offset-3 comments-question" *ngIf="comments">
 
   <span>Comments/Answers</span>
-  <div class="all-comments">
+  <div class="all-comments"  *ngFor="let comment of question.comments">
     <div class="comment">
       <div>
-      <div class="author">{{comments.author}}</div>
-      <div class="text-comment">{{comments.textComments}}</div>
+      <img class="author" src="{{(comment.author) ? comment.author : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}">
+      <div class="text-comment">{{comment.textComment}}</div>
     </div>
       <div>
-        <div>{{comments.date}}</div>
-        <input type="checkbox" class="form-check-input" id="resolve"/>
+        <div>{{comment.date.seconds * 1000 | date:'MM-dd-yyyy'}}</div>
+        <input type="checkbox" class="form-check-input" id="resolve-{{index}}" [checked]="comment.isResolved" />
        <label for="resolve">resolve</label>
       </div>
     </div>

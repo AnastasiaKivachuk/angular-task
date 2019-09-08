@@ -12,6 +12,9 @@
             <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
           </li>
           <li class="nav-item hideLi">
+              <a class="nav-link" (click)="authService.UserProfile()">
+                  <i class="fa fa-sign-out-alt"></i>User Profile
+                </a>
             <a class="nav-link" (click)="authService.SignOut()">
               <i class="fa fa-sign-out-alt"></i>Log out
             </a>

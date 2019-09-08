@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { Question } from "../services/question";
+import { Comments } from "../services/question";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
@@ -14,7 +15,7 @@ import { from, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OtherService {
-  comments: Comment[];
+  comments: Comments[];
   id: string;
   constructor(private firestore: AngularFirestore,
     public router: Router,  // Inject Firestore service
@@ -107,7 +108,7 @@ export class OtherService {
         console.error("Error updating document: ", error);
       });
 }
-addCommentToQuestion(comments: Comment[], id: string) {
+addCommentToQuestion(comments: Comments[], id: string) {
   console.log(comments);
   console.log(id);
   return this.firestore.collection("questions").doc(id).update({

@@ -21,6 +21,7 @@ import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
 import { OpenQuestionComponent } from './components/open-question/open-question.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { OpenQuestionComponent } from './components/open-question/open-question.
     CreateQuestionComponent,
     HeaderComponent,
     EditQuestionComponent,
-    OpenQuestionComponent
+    OpenQuestionComponent,
+    UserProfileComponent
   ],
   imports: [
     // ReactiveFormsModule,

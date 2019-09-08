@@ -41,10 +41,6 @@ export class EditQuestionComponent implements OnInit {
 
   }
 
-  // updateQuestion(question){
-  //   this.otherService.updateQuestion(question);
-  //   this.router.navigate(['dashboard']);
-  // }
 
   updateQuestion(form: NgForm) {
     const question: Question = {

@@ -12,15 +12,15 @@
           </div>
           <div class="row buttons">
               <!-- *ngIf="JSON.parse(localStorage.getItem('user')).isAdmin" -->
-            <a  class="button-list-question" (click)="approveQuestion2(question)">
+              <!-- *ngIf="authService.userData.isAdmin" -->
+            <a  class="button-list-question" (click)="approveQuestion2(question)"  [hidden]="question.payload.doc.data().isApproved" >
               <i class="fa fa-check"></i>Approve
             </a>
-            <a class="button-list-question" (click)="deleteQuestion(question)">
+            <a class="button-list-question" (click)="deleteQuestion(question)"  [hidden]="question.payload.doc.data().isApproved" >
               <i class="fa fa-trash-o"></i>Delete
             </a>
           </div>
           </div>
-  <!-- <app-list-of-questions ></app-list-of-questions> -->
 </div>
 
 

@@ -11,6 +11,7 @@ import { SecureInnerPagesGuard } from "./shared/guard/secure-inner-pages.guard.t
 import {CreateQuestionComponent} from './components/create-question/create-question.component';
 import {EditQuestionComponent} from './components/edit-question/edit-question.component';
 import {OpenQuestionComponent} from './components/open-question/open-question.component';
+import {UserProfileComponent} from './components/user-profile/user-profile.component';
 const routes: Routes = [
   { path: '', redirectTo: '/sign-in', pathMatch: 'full' },
   { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard] },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] },
   { path: 'create-new-question', component: CreateQuestionComponent, canActivate: [AuthGuard] },
   { path: 'edit-question/:id', component: EditQuestionComponent, canActivate: [AuthGuard] },
-  { path: 'open-question/:id', component: OpenQuestionComponent, canActivate: [AuthGuard] }
+  { path: 'open-question/:id', component: OpenQuestionComponent, canActivate: [AuthGuard] },
+  { path: 'user-profile', component: UserProfileComponent, canActivate: [AuthGuard] }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

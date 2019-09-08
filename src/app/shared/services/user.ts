@@ -1,19 +1,13 @@
-export class User {
+export interface User {
   uid: string;
   email: string;
   displayName: string;
   photoURL: string;
+  isAdmin: boolean;
   emailVerified: boolean;
-  role?: Roles;
-  constructor(authData) {
-    this.role    = { reader: true }
-  };
+
+  // role: string;
 }
 
-export interface Roles {
-  reader: boolean;
-  author?: boolean;
-  admin?: boolean;
-}
 
 

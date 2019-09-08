@@ -4,26 +4,18 @@ import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router, ActivatedRoute } from "@angular/router";
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
 
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/switchMap';
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
   userData: any; // Save logged in user data
-  user: BehaviorSubject<User> = new BehaviorSubject(null)
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone, // NgZone service to remove outside scope warning
-    private firestore: AngularFirestore,
 
   ) {
     /* Saving user data in localstorage when
@@ -44,9 +36,9 @@ export class AuthService {
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-
-        this.SetUserData(result.user);
         this.router.navigate(['dashboard']);
+        this.SetUserData(result.user);
+
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -134,6 +126,7 @@ export class AuthService {
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
+
   SetUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const userData: User = {
@@ -141,19 +134,51 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
-    }
+      isAdmin: (user.email === 'm8062852@gmail.com') ? true: false,
+      emailVerified: user.emailVerified,
+    };
+  console.log(userData.isAdmin);
     return userRef.set(userData, {
       merge: true
     })
+
   }
+
+  // SetUserData2(user) {
+  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+  //   const userData: User = {
+  //     uid: user.uid,
+  //     email: user.email,
+  //     displayName: user.displayName,
+  //     photoURL: user.photoURL,
+  //     isAdmin: (user.email === 'm8062852@gmail.com') ? true: false,
+  //     emailVerified: user.emailVerified,
+  //   };
+  // console.log(userData);
+  //   return userRef.set(userData, {
+  //     merge: true
+  //   })
+
+  // }
 
   // Sign out
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
+      this.router.navigate(['sign-in']);this.router.navigate(['sign-in']);
     })
+  }
+
+  // getAdmin(){
+  //   console.log(JSON.parse(localStorage.getItem('user')));
+  //   this.firestore.doc(`users/${localStorage.getItem('user')).uid}`).get().subscribe(data => {
+  //     this.question = {...data.data(), id: questionId} as Question;
+  //     this.comments = this.question.comments;
+  //     console.log(this.comments);
+  // });
+  // }
+  UserProfile(){
+    this.router.navigate(['user-profile']);
   }
 
 }

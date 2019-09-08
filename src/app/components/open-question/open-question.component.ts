@@ -16,11 +16,9 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 })
 export class OpenQuestionComponent implements OnInit {
   id: string;
-  // private subId: Subscription;
   question: Question;
-  comments: Comment[];
+  comments;
   isLoading = true;
-  // loadingSub: Subscription;
   user: User;
   visibility = false;
   constructor(
@@ -37,6 +35,8 @@ export class OpenQuestionComponent implements OnInit {
 
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;
+          this.comments = this.question.comments;
+          console.log(this.comments);
       });
 }
 
@@ -47,19 +47,6 @@ deleteQuestion(question){
 
 
 
-
-// updateQuestion(form: NgForm) {
-//   const question: Question = {
-//   comments: form.value.comments,
-
-//   id: this.route.snapshot.paramMap.get("id")
-//   };
-//   console.log(question.id);
-//   this.otherService.updateQuestion(question);
-//   console.log(question);
-//   this.router.navigate([`/open-question/${question.id}`]);
-// }
-
 approveQuestion(question) {
   this.otherService.approveQuestion(question);
   this.question.isApproved = true;
@@ -69,15 +56,13 @@ approveQuestion(question) {
 addNewComment(form: NgForm) {
   const newComment: Comments = {
     textComment: form.value.comments,
-    author: JSON.parse(localStorage.getItem('user')).email,
+    author: JSON.parse(localStorage.getItem('user')).photoURL,
     date: new Date(),
     isResolved: false
   };
   this.question.comments.push(newComment);
-  // const comments = this.question.comments;
-  // const id=this.route.snapshot.paramMap.get("id");
 
   this.otherService.addCommentToQuestion(this.question.comments, this.route.snapshot.paramMap.get("id"));
-  this.router.navigate(['dashboard']);
+  this.router.navigate([`/open-question/${this.question.id}`]);
 }
 }
