@@ -109,12 +109,32 @@ export class OtherService {
       });
 }
 addCommentToQuestion(comments: Comments[], id: string) {
-  console.log(comments);
-  console.log(id);
   return this.firestore.collection("questions").doc(id).update({
     comments
   })
     .then(function () {
+      console.log("Document successfully updated!");
+    })
+    .catch(function (error) {
+      console.error("Error updating document: ", error);
+    });
+}
+
+updateIsAnswered(isAnswered: boolean, id: string) {
+  return this.firestore.collection('questions').doc(id).update({
+      isAnswered: isAnswered
+    }).then(function () {
+      console.log("Document successfully updated!");
+    })
+    .catch(function (error) {
+      console.error("Error updating document: ", error);
+    });
+}
+
+updateCommentsInDatabase(comments: Comment[], id: string) {
+  return this.firestore.collection('questions').doc(id).update({
+      comments
+    }).then(function () {
       console.log("Document successfully updated!");
     })
     .catch(function (error) {

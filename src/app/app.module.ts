@@ -22,6 +22,10 @@ import { CommonModule } from '@angular/common';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
 import { OpenQuestionComponent } from './components/open-question/open-question.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { OrderByPipe } from './shared/pipes/order-by.pipe';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -35,10 +39,13 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     HeaderComponent,
     EditQuestionComponent,
     OpenQuestionComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    OrderByPipe
   ],
   imports: [
     // ReactiveFormsModule,
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
     CommonModule,
     FormsModule,
     BrowserModule,

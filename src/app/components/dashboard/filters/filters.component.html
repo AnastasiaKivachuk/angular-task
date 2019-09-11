@@ -1,13 +1,42 @@
 <div class="headerWrap row">
-  <div class="col-md-2 filters">
+  <div class="col-md-6 filters">
     <h6><i class="fa fa-filter"></i>Filters</h6>
+    <select class="mdb-select md-form" (change)="filterExact('family', family)">
+      <option value="1">All questions</option>
+      <option value="Answered">Answered</option>
+      <option value="NotAnswered">Not answered</option>
+    </select>
+    <!-- <select class="mdb-select md-form">
+      <option value="" disabled selected>Choose your option</option>
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+    </select> -->
+    <select class="mdb-select md-form">
+      <option value="" disabled selected>Choose tegs</option>
+      <option value="AllTegs">All tegs</option>
+      <option value="HTML">HTML</option>
+      <option value="CSS">CSS</option>
+      <option value="JS">JS</option>
+    </select>
+    <select class="mdb-select md-form">
+      <option value="AllQuestions">All questions</option>
+      <option value="MyQuestion">My question</option>
+    </select>
   </div>
-  <div class="col-md-2 offset-3 sort">
+  <div class="col-md-3 sort">
 
-    <h6><i class="fa fa-sort"></i>Sort</h6>
+    <h6><i class="fa fa-sort"></i>Sort:</h6>
 
+
+
+   <a class="sort-arrow"><i class="fa fa-arrow-up"></i>Sort asc</a>
+
+   <a class="sort-arrow"><i class="fa fa-arrow-down"></i>Sort desc</a>
+<!-- <i class="fa fa-arrow-up">sort asc</i>
+<i class="fa fa-arrow-down">sort desc</i> -->
   </div>
-  <div class="col-md-2 offset-3">
+  <div class="col-md-2 offset-1">
     <a class="nav-link">
       Settings<i class="fa fa-cog"></i>
     </a>

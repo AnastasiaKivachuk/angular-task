@@ -8,6 +8,7 @@ import {User} from "../../shared/services/user";
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-open-question',
@@ -21,6 +22,8 @@ export class OpenQuestionComponent implements OnInit {
   isLoading = true;
   user: User;
   visibility = false;
+  isAdmin;
+  normalDate;
   constructor(
     public otherService: OtherService,
     public authService: AuthService,
@@ -36,15 +39,24 @@ export class OpenQuestionComponent implements OnInit {
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;
           this.comments = this.question.comments;
-          console.log(this.comments);
+          this.comments.date=this.comments.forEach(comment => {
+            // console.log(comment.date.seconds * 1000);           comment.date=  comment.date.seconds * 1000;
+            })
       });
+
+
+      let uid=JSON.parse(localStorage.getItem('user')).uid;
+      this.firestore.doc(`users/${uid}`).get().subscribe(data => {
+        this.user = {...data.data(), uid: uid} as User;
+        this.isAdmin=this.user.isAdmin;
+        // console.log(this.isAdmin);
+    });
 }
 
 deleteQuestion(question){
   this.otherService.deleteQuestion2(question);
   this.router.navigate(['dashboard']);
 }
-
 
 
 approveQuestion(question) {
@@ -57,12 +69,27 @@ addNewComment(form: NgForm) {
   const newComment: Comments = {
     textComment: form.value.comments,
     author: JSON.parse(localStorage.getItem('user')).photoURL,
-    date: new Date(),
+    date: moment().format('L'),
     isResolved: false
   };
   this.question.comments.push(newComment);
-
+  console.log(newComment.date);
+  form.reset();
   this.otherService.addCommentToQuestion(this.question.comments, this.route.snapshot.paramMap.get("id"));
   this.router.navigate([`/open-question/${this.question.id}`]);
+
+}
+changeIsResolved(target, id: number) {
+  let isAnswered = false;
+    this.comments[id].isResolved = target.checked;
+    console.log(target.checked);
+    this.otherService.updateCommentsInDatabase(this.comments, this.route.snapshot.paramMap.get("id"));
+    this.comments.forEach(comment => {
+      if (comment.isResolved) {
+        isAnswered = true;
+      }
+    });
+    this.otherService.updateIsAnswered(isAnswered, this.route.snapshot.paramMap.get("id"));
 }
 }
+

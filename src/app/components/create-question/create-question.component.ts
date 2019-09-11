@@ -4,6 +4,7 @@ import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import {Question} from "../../shared/services/question";
 import {NgForm} from '@angular/forms';
+import * as moment from 'moment';
 
 
 @Component({
@@ -12,7 +13,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./create-question.component.sass']
 })
 export class CreateQuestionComponent implements OnInit {
-
+  public now = moment().format('L');
   constructor(
     public otherService: OtherService,
     public authService: AuthService,

@@ -2,9 +2,10 @@ import { Component, OnInit, NgZone  } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import { OtherService } from "../../shared/services/other.service";
-import { Question } from '../../shared/services/question';  // Student data type interface class
+import { Question } from '../../shared/services/question';
+import { User } from '../../shared/services/user';   // Student data type interface class
 import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';  // Firebase modules for Database, Data list and Single object
-
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,27 +14,41 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 })
 export class DashboardComponent implements OnInit {
   id: string;
-  // private subId: Subscription;
   question: Question;
+  user: User;
+  isAdmin;
+  allQuestions;
+  sortDirection = 'new';
   constructor(
     public authService: AuthService,
     public router: Router,
     public ngZone: NgZone,
-    public otherService: OtherService
+    public otherService: OtherService,
+    private firestore: AngularFirestore,
   ) { }
 
   ngOnInit() {this.getQuestion();
-    // this.authService.getAdmin();
-    console.log(JSON.parse(localStorage.getItem('user')));
+
+    let uid=JSON.parse(localStorage.getItem('user')).uid;
+    this.firestore.doc(`users/${uid}`).get().subscribe(data => {
+      this.user = {...data.data(), uid: uid} as User;
+      this.isAdmin=this.user.isAdmin;
+      console.log(this.isAdmin);
+  });
    }
 
+   orderBy(state: string) {
+    
+    this.sortDirection = state;
+ 
+  }
 
-allQuestions;
 getQuestion = () =>{
    this.otherService
    .getQuestion()
    .subscribe(res =>(this.allQuestions = res));
 }
+
 
 deleteQuestion(question){
   this.otherService.deleteQuestion(question);

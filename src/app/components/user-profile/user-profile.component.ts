@@ -14,12 +14,14 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(    public authService: AuthService,
+  constructor(
+    public authService: AuthService,
     public router: Router,
     public ngZone: NgZone,
     public otherService: OtherService) { }
 
   ngOnInit() {
+  // console.log(this.authService.userData.email);
   }
 
 }

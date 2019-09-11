@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="row buttons-form">
-          <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK" >
+          <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK"  [disabled]="f.invalid" >
           <input type="button" class="btn btn-primary col-md-4 offset-4 button-form" value="Cancel" type="reset" (click)="otherService.GoToHome()">
         </div>
     </form>

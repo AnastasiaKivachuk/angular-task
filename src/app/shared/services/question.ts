@@ -15,6 +15,6 @@ export interface Question {
 export interface Comments {
   textComment: string;
   author?: string;
-  date?: Date;
+  date?: string;
   isResolved?: boolean;
 }

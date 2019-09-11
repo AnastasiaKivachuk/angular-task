@@ -66,7 +66,6 @@ export class AuthService {
     })
   }
 
-
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -137,7 +136,7 @@ export class AuthService {
       isAdmin: (user.email === 'm8062852@gmail.com') ? true: false,
       emailVerified: user.emailVerified,
     };
-  console.log(userData.isAdmin);
+  console.log(userData.isAdmin );
     return userRef.set(userData, {
       merge: true
     })
