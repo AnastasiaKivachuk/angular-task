@@ -39,9 +39,10 @@ export class OpenQuestionComponent implements OnInit {
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;
           this.comments = this.question.comments;
-          this.comments.date=this.comments.forEach(comment => {
-            // console.log(comment.date.seconds * 1000);           comment.date=  comment.date.seconds * 1000;
-            })
+          // this.comments.isResolved=this.comments.sort(comment => {
+            
+          //   // console.log(comment.date.seconds * 1000);           comment.date=  comment.date.seconds * 1000;
+          //   })
       });
 
 
@@ -90,6 +91,8 @@ changeIsResolved(target, id: number) {
       }
     });
     this.otherService.updateIsAnswered(isAnswered, this.route.snapshot.paramMap.get("id"));
+    // this.router.navigate([`/open-question/${this.route.snapshot.paramMap.get("id")}`]);
+    // this.router.navigate([`/open-question/${this.question.id}`]);
 }
 }
 

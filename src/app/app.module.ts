@@ -25,6 +25,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { OrderByPipe } from './shared/pipes/order-by.pipe';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ResolvedCommentPipe } from './shared/pipes/resolved-comment.pipe';
+import { FiltersPipe } from './shared/pipes/filters.pipe';
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     EditQuestionComponent,
     OpenQuestionComponent,
     UserProfileComponent,
-    OrderByPipe
+    OrderByPipe,
+    ResolvedCommentPipe,
+    FiltersPipe
   ],
   imports: [
     // ReactiveFormsModule,

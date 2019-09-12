@@ -6,8 +6,8 @@ export interface Question {
   CSS: boolean;
   JS: boolean;
   date?: Date;
-  isApproved?;
-  isAnswered?;
+  isApproved?:boolean;
+  isAnswered?:boolean;
   comments?: Comments[],
   id?: string;
 }

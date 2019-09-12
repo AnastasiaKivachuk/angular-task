@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   isAdmin;
   allQuestions;
   sortDirection = 'new';
+  typeFilter;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -38,9 +39,11 @@ export class DashboardComponent implements OnInit {
    }
 
    orderBy(state: string) {
-    
     this.sortDirection = state;
- 
+  }
+
+  filterBy(state: string) {
+    this.typeFilter = state;
   }
 
 getQuestion = () =>{

@@ -1,12 +1,42 @@
 <app-header></app-header>
 <app-filters></app-filters>
+<!-- <select class="mdb-select md-form">
+  <option (click)="filterBy('')"value="1">All questions</option>
+  <option (click)="filterBy('Answered')" value="Answered">Answered</option>
+  <option (click)="filterBy('NotAnswered')" value="NotAnswered">Not answered</option>
+</select> -->
+<a class="sort-arrow" (click)="filterBy('')">All</a>
+<a class="sort-arrow" (click)="filterBy('Approved')">Approved</a>
+
+<a class="sort-arrow" (click)="filterBy('NotApproved')">Not approved</a>
+
+<div></div>
+<a class="sort-arrow" (click)="filterBy('')">All tegs</a>
+<a class="sort-arrow" (click)="filterBy('HTML')">HTML</a>
+
+<a class="sort-arrow" (click)="filterBy('CSS')">CSS</a>
+<a class="sort-arrow" (click)="filterBy('JS')">JS</a>
+
+<div></div>
+<a class="sort-arrow" (click)="filterBy('')">All</a>
+<a class="sort-arrow" (click)="filterBy('Answered')">Answered</a>
+
+<a class="sort-arrow" (click)="filterBy('NotAnswered')">Not answered</a>
+<div></div>
+<a class="sort-arrow" (click)="filterBy('')">All</a>
+<a class="sort-arrow" (click)="filterBy('myQuestion')">My question</a>
+<div></div>
+<a class="sort-arrow" (click)="filterBy('')">All</a>
+<a class="sort-arrow" (click)="filterBy('lastWeek')">last week</a>
+<a class="sort-arrow" (click)="filterBy('lastMonth')">last month</a>
+
 <h6><i class="fa fa-sort"></i>Sort:</h6>
 
 <a class="sort-arrow" (click)="orderBy('old')"><i class="fa fa-arrow-up"></i>first old</a>
 
 <a class="sort-arrow" (click)="orderBy('new')"><i class="fa fa-arrow-down"></i>first new</a>
 <main role="main" class="row">
-    <div class="question col-md-3" *ngFor="let question of allQuestions| orderBy: sortDirection" [hidden]="!question.payload.doc.data().isApproved && !isAdmin" >
+    <div class="question col-md-3" *ngFor="let question of allQuestions| orderBy: sortDirection | filters: typeFilter" [hidden]="!question.payload.doc.data().isApproved && !isAdmin" >
         <div class="d-flex justify-content-between">
             <a [routerLink]="['/open-question', question.payload.doc.id]" class="title-list-question">{{ question.payload.doc.data().title }}</a>
             <i class="fa fa-check" [hidden]="!question.payload.doc.data().isAnswered"></i>
