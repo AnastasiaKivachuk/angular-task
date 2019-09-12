@@ -1,40 +1,49 @@
 <app-header></app-header>
-<app-filters></app-filters>
-<!-- <select class="mdb-select md-form">
-  <option (click)="filterBy('')"value="1">All questions</option>
-  <option (click)="filterBy('Answered')" value="Answered">Answered</option>
-  <option (click)="filterBy('NotAnswered')" value="NotAnswered">Not answered</option>
-</select> -->
-<a class="sort-arrow" (click)="filterBy('')">All</a>
-<a class="sort-arrow" (click)="filterBy('Approved')">Approved</a>
+<div class="headerWrap row">
+  <div class="col-md-8 filters">
+    <h6><i class="fa fa-filter"></i>Filters</h6>
+    <select class="mdb-select md-form" (change)="filterBy($event.target.value)">
+      <option value="" disabled selected>Answered/Not</option>
+      <option value="Answered">Answered</option>
+      <option value="NotAnswered">Not answered</option>
+    </select>
+    <select class="mdb-select md-form" (change)="filterBy($event.target.value)">
+      <option value="" disabled selected>Tegs</option>
+      <option value="AllTegs">All tegs</option>
+      <option value="HTML">HTML</option>
+      <option value="CSS">CSS</option>
+      <option value="JS">JS</option>
+    </select>
+    <select class="mdb-select md-form" (change)="filterBy($event.target.value)">
+      <option value="" disabled selected>My question</option>
+      <option value="myQuestion">My question</option>
+    </select>
+    <select class="mdb-select md-form" *ngIf="isAdmin " (change)="filterBy($event.target.value)">
+      <option value="" disabled selected>Approved/Not</option>
+      <option value="Approved">Approved</option>
+      <option value="NotApproved">Not approved</option>
+    </select>
+    <select class="mdb-select md-form" (change)="filterBy($event.target.value)">
+      <option value="" disabled selected>Time</option>
+      <option value="lastWeek">Last week</option>
+      <option value="lastMonth">Last month</option>
+    </select>
+    <button class="button-list-question" (click)="filterBy('')"><i class="fa fa-trash-o" ></i>Delete filters</button>
+  </div>
+  <div class="col-md-2 sort ">
 
-<a class="sort-arrow" (click)="filterBy('NotApproved')">Not approved</a>
+    <h6><i class="fa fa-sort"></i>Sort:</h6>
+    <a class="sort-arrow" (click)="orderBy('old')"><i class="fa fa-arrow-up"></i>first old</a>
 
-<div></div>
-<a class="sort-arrow" (click)="filterBy('')">All tegs</a>
-<a class="sort-arrow" (click)="filterBy('HTML')">HTML</a>
+    <a class="sort-arrow" (click)="orderBy('new')"><i class="fa fa-arrow-down"></i>first new</a>
+  </div>
+  <div class="col-md-2">
+    <a class="nav-link">
+      Settings<i class="fa fa-cog"></i>
+    </a>
 
-<a class="sort-arrow" (click)="filterBy('CSS')">CSS</a>
-<a class="sort-arrow" (click)="filterBy('JS')">JS</a>
-
-<div></div>
-<a class="sort-arrow" (click)="filterBy('')">All</a>
-<a class="sort-arrow" (click)="filterBy('Answered')">Answered</a>
-
-<a class="sort-arrow" (click)="filterBy('NotAnswered')">Not answered</a>
-<div></div>
-<a class="sort-arrow" (click)="filterBy('')">All</a>
-<a class="sort-arrow" (click)="filterBy('myQuestion')">My question</a>
-<div></div>
-<a class="sort-arrow" (click)="filterBy('')">All</a>
-<a class="sort-arrow" (click)="filterBy('lastWeek')">last week</a>
-<a class="sort-arrow" (click)="filterBy('lastMonth')">last month</a>
-
-<h6><i class="fa fa-sort"></i>Sort:</h6>
-
-<a class="sort-arrow" (click)="orderBy('old')"><i class="fa fa-arrow-up"></i>first old</a>
-
-<a class="sort-arrow" (click)="orderBy('new')"><i class="fa fa-arrow-down"></i>first new</a>
+  </div>
+</div>
 <main role="main" class="row">
     <div class="question col-md-3" *ngFor="let question of allQuestions| orderBy: sortDirection | filters: typeFilter" [hidden]="!question.payload.doc.data().isApproved && !isAdmin" >
         <div class="d-flex justify-content-between">
