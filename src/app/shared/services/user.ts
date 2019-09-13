@@ -5,8 +5,7 @@ export interface User {
   photoURL: string;
   isAdmin: boolean;
   emailVerified: boolean;
-
-  // role: string;
+  block?: boolean;
 }
 
 

@@ -1,103 +1,92 @@
-<div class="headerWrap row">
-  <div class="col-md-2">
-    <h1>LOGO</h1>
-  </div>
-  <div class="col-md-3 offset-3">
+<div class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="col-md-1">
+      <h1 class="logo" (click)="otherService.GoToHome()">LOGO</h1>
+    </div>
+    <div class="col-md-2 offset-6 ">
 
-    <a class="add-quastion-btn" href="/create-new-question">
-      <i class="fa fa-plus"></i>Add quastion
-    </a>
-
-  </div>
-  <div class="col-md-4">
-    <div class="sidebar-sticky">
-      <ul class="nav flex-column">
-        <li class="nav-item" *ngIf="authService.userData as user">
-          <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}"
+        <a class="btn btn-outline-primary" href="/create-new-question">
+          <i class="fa fa-plus"></i>Add quastion
+        </a>
+    </div>
+    <div class="col-md-3">
+    <div class="dropdown" *ngIf="authService.userData as user">
+        <button class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}"
             alt="{{user.displayName}}">
-          <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
-        </li>
-        <li class="nav-item hideLi">
-          <a class="nav-link" (click)="authService.UserProfile()">
-            <i class="fa fa-sign-out-alt"></i>User Profile
-          </a>
-          <a class="nav-link" (click)="authService.SignOut()">
-            <i class="fa fa-sign-out-alt"></i>Log out
-          </a>
-        </li>
-      </ul>
-    </div>
+            <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
+        </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item"  (click)="authService.UserProfile()"><i class="fa fa-sign-out-alt"></i>User Profile</a>
+        <a class="dropdown-item"  (click)="authService.SignOut()"> <i class="fa fa-sign-out-alt"></i>Log out</a>
 
-  </div>
-</div>
-
-
-<div class="col-md-6 offset-3 new-question" *ngIf="question">
-  <div class="header-question">
-    <div class="author-question">{{question.author}}</div>
-    <h2 class="title-question">{{ question.title}}</h2>
-    <div class="date-question">{{ question.date.seconds * 1000 | date:'dd/MM/yyyy'  }}</div>
-    <i class="fa fa-close close" (click)="otherService.GoToHome()"></i>
-  </div>
-  <hr align="center" width="80%" size="4" color="black" />
-  <div class="description">
-    {{question.text}}
-  </div>
-
-  <div class="header-question " >
-    <div>
-
-      <span class="tags-list-question">{{ (question.HTML)?'HTML/  ': ""}}</span>
-      <span class="tags-list-question">{{ (question.CSS)?'CSS/  ': ""}}</span>
-      <span class="tags-list-question">{{ (question.JS)?'JS/  ': ""}}</span>
-    </div>
-    <div class="buttons">
-
-      <a  class="button-list-question" (click)="approveQuestion(question)" *ngIf="isAdmin" [hidden]="question.isApproved">
-        <i class="fa fa-check"></i>Approve
-      </a>
-      <span class="tags-list-question">{{ authService.userData.isAdmin }}</span>
-      <a class="button-list-question" [routerLink]="['/edit-question', question.id]" *ngIf="authService.userData.email == question.author">
-        <i class="fa fa-paint-brush"></i>Edit
-      </a>
-      <a class="button-list-question" (click)="deleteQuestion(question)" *ngIf="isAdmin" [hidden]="question.isApproved" >
-        <i class="fa fa-trash-o"></i>Delete
-      </a>
-    </div>
-  </div>
-</div>
-
-
-<div class="col-md-6 offset-3 comments-question">
-
-    <form #f="ngForm" (ngSubmit)="addNewComment(f)" novalidate>
-      <div class="form-group col-md-10 offset-1">
-        <label>Add comment</label>
-        <textarea type="text" class="form-control" placeholder="Comment" name="comments"  ngModel  #comments="ngModel" required></textarea>
       </div>
-        <div class="row buttons-form">
-          <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK"  [disabled]="f.invalid">
-          <input type="button" class="btn btn-primary col-md-4 offset-4 button-form" value="Cancel" type="reset">
+    </div>
+
+
+    </div>
+  </div>
+
+
+
+<div class="card bg-light mb-3 col-md-8 offset-2" *ngIf="question">
+    <div class="card-body"> <div class="header-question">
+        <div class="author-question">{{question.author}}</div>
+        <h2 class="title-question">{{ question.title}}</h2>
+        <div class="date-question">{{ question.date.seconds * 1000 | date:'dd/MM/yyyy'  }}</div>
+        <i class="fa fa-close close" (click)="otherService.GoToHome()"></i>
+      </div>
+      <hr align="center" width="80%" size="4" color="black" />
+      <div class="description">
+        {{question.text}}
+      </div>
+
+      <div class="header-question " >
+        <div>
+
+          <span class="tags-list-question">{{ (question.HTML)?'HTML/  ': ""}}</span>
+          <span class="tags-list-question">{{ (question.CSS)?'CSS/  ': ""}}</span>
+          <span class="tags-list-question"><i class="fa fa-tags "></i>{{ (question.JS)?'JS/  ': ""}}</span>
         </div>
-    </form>
+        <div class="buttons">
+
+          <a  class="button-list-question" (click)="approveQuestion(question)" *ngIf="isAdmin" [hidden]="question.isApproved">
+            <i class="fa fa-check"></i>Approve
+          </a>
+          <span class="tags-list-question">{{ authService.userData.isAdmin }}</span>
+          <a class="button-list-question" [routerLink]="['/edit-question', question.id]" *ngIf="authService.userData.email == question.author">
+            <i class="fa fa-paint-brush"></i>Edit
+          </a>
+          <a class="button-list-question" (click)="deleteQuestion(question)" *ngIf="isAdmin" [hidden]="question.isApproved" >
+            <i class="fa fa-trash-o"></i>Delete
+          </a>
+        </div>
+      </div></div>
+    <div class="card-header">
+        <form #f="ngForm" (ngSubmit)="addNewComment(f)" novalidate>
+            <div class="form-group col-md-10 offset-1">
+              <label>Add comment</label>
+              <textarea type="text" class="form-control" placeholder="Comment" name="comments"  ngModel  #comments="ngModel" required></textarea>
+            </div>
+              <div class="row buttons-form">
+                <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK"  [disabled]="f.invalid">
+                <input type="button" class="btn btn-primary col-md-4 offset-4 button-form" value="Cancel" type="reset">
+              </div>
+          </form>
+    </div>
+    <div class="card-body" *ngIf="comments"><span>Comments/Answers</span>
+      <div class="all-comments"  *ngFor="let comment of question.comments | resolvedComment; let i = index">
+        <div class="comment">
+          <div>
+          <img class="author" src="{{(comment.author) ? comment.author : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}">
+          <div class="text-comment">{{comment.textComment}}</div>
+        </div>
+          <div>
+            <div>{{ comment.date}}</div>
+            <input type="checkbox" class="form-check-input" id="resolve{{i +1}}"  *ngIf="authService.userData.email == question.author" [checked]="comment.isResolved" (change)="changeIsResolved($event.target, i)"/>
+           <label for="resolve{{i +1}}" *ngIf="authService.userData.email == question.author">resolve</label>
+           <i class="fa fa-check" [hidden]="!comment.isResolved"></i>
+          </div>
+        </div>
+      </div></div>
   </div>
 
-<div class="col-md-6 offset-3 comments-question" *ngIf="comments">
-
-  <span>Comments/Answers</span>
-  <div class="all-comments"  *ngFor="let comment of question.comments | resolvedComment; let i = index">
-    <div class="comment">
-      <div>
-      <img class="author" src="{{(comment.author) ? comment.author : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}">
-      <div class="text-comment">{{comment.textComment}}</div>
-    </div>
-      <div>
-        <div>{{ comment.date}}</div>
-        <input type="checkbox" class="form-check-input" id="resolve{{i +1}}"  *ngIf="authService.userData.email == question.author" [checked]="comment.isResolved" (change)="changeIsResolved($event.target, i)"/>
-       <label for="resolve{{i +1}}" *ngIf="authService.userData.email == question.author">resolve</label>
-       <i class="fa fa-check" [hidden]="!comment.isResolved"></i>
-      </div>
-    </div>
-  </div>
-
-</div>

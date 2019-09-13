@@ -1,37 +1,38 @@
-
-<!-- <app-header-question></!-->
-<!-- <app-form-question></app-form-question> -->
-
-
-<div class="headerWrap row">
-    <div class="col-md-2">
-      <h1>LOGO</h1>
-    </div>
-
-    <div class="col-md-4 offset-6">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item" *ngIf="authService.userData as user">
-              <img class="img-thumbnail rounded-circle" src="{{(user.photoURL) ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}"
-              alt="{{user.displayName}}">
-              <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
-            </li>
-            <li class="nav-item hideLi">
-                <a class="nav-link" (click)="authService.UserProfile()">
-                    <i class="fa fa-sign-out-alt"></i>User Profile
-                  </a>
-              <a class="nav-link" (click)="authService.SignOut()">
-                <i class="fa fa-sign-out-alt"></i>Log out
-              </a>
-            </li>
-          </ul>
-        </div>
-
-    </div>
+<div class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="col-md-1">
+    <h1 class="logo" (click)="otherService.GoToHome()">LOGO</h1>
   </div>
+  <div class="col-md-2 offset-6 ">
 
-<div class="col-md-6 offset-3 new-question">
-    <h2 class="title-list-question">New question</h2>
+    <a class="btn btn-outline-primary" href="/create-new-question">
+      <i class="fa fa-plus"></i>Add quastion
+    </a>
+  </div>
+  <div class="col-md-3">
+    <div class="dropdown" *ngIf="authService.userData as user">
+      <button class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <img class="img-thumbnail rounded-circle"
+          src="{{(user.photoURL) ? user.photoURL : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT84KPNyltSZdDS4bbZn-ALpvS6lBQd6jJj-tpHSyNUh_dsgXU7'}}"
+          alt="{{user.displayName}}">
+        <span>{{(user.displayName) ? user.displayName : 'User'}}</span>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" (click)="authService.UserProfile()"><i class="fa fa-sign-out-alt"></i>User Profile</a>
+        <a class="dropdown-item" (click)="authService.SignOut()"> <i class="fa fa-sign-out-alt"></i>Log out</a>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<div class="card bg-light mb-3 col-md-6 offset-3">
+  <div class="card-header title-list-question">New question<i class="fa fa-close close"
+      (click)="otherService.GoToHome()"></i></div>
+
+  <div class="card-body">
     <form #f="ngForm" (ngSubmit)="addQuestion(f)" novalidate>
       <div class="form-group col-md-10 offset-1">
         <label>Title</label>
@@ -39,31 +40,36 @@
       </div>
       <div class="form-group col-md-10 offset-1">
         <label>Text</label>
-        <textarea type="text" class="form-control" placeholder="Text" name="text"  ngModel  #text="ngModel"  required></textarea>
-      </div>  <div class="row">
-      <div class="tags">
+        <textarea type="text" class="form-control" placeholder="Text" name="text" ngModel #text="ngModel"
+          required></textarea>
+      </div>
+      <div class="row">
+        <div class="tags">
           <label>Tags: </label>
         </div>
-          <div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="HTML"  ngModel name="HTML" value="HTML"  #HTML="ngModel">
-              <label class="form-check-label" for="HTML">HTML</label>
+        <div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="HTML" ngModel name="HTML" value="HTML" #HTML="ngModel">
+            <label class="form-check-label" for="HTML">HTML</label>
 
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="CSS"  ngModel name="CSS" value="CSS"  #CSS="ngModel">
-              <label class="form-check-label" for="CSS">CSS</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="CSS" ngModel name="CSS" value="CSS" #CSS="ngModel">
+            <label class="form-check-label" for="CSS">CSS</label>
 
-            </div>
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="JS"   ngModel name="JS" value="JS"  #JS="ngModel">
-              <label class="form-check-label" for="JS">JS</label>
-            </div>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="JS" ngModel name="JS" value="JS" #JS="ngModel">
+            <label class="form-check-label" for="JS">JS</label>
           </div>
         </div>
-        <div class="row buttons-form">
-          <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK"  [disabled]="f.invalid" >
-          <input type="button" class="btn btn-primary col-md-4 offset-4 button-form" value="Cancel" type="reset" (click)="otherService.GoToHome()">
-        </div>
+      </div>
+      <div class="row buttons-form">
+        <input type="button" type="submit" class="btn btn-primary col-md-4 offset-4 button-form" value="OK"
+          [disabled]="f.invalid">
+        <input type="button" class="btn btn-primary col-md-4 offset-4 button-form" value="Cancel" type="reset"
+          (click)="otherService.GoToHome()">
+      </div>
     </form>
   </div>
+</div>

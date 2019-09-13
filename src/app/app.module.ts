@@ -14,7 +14,6 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import {AuthService} from './shared/services/auth.service';
 import {OtherService} from './shared/services/other.service';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { FiltersComponent } from './components/dashboard/filters/filters.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
 import { HeaderComponent } from './components/dashboard/header/header.component';
 import { FormsModule }   from '@angular/forms';
@@ -36,7 +35,6 @@ import { FiltersPipe } from './shared/pipes/filters.pipe';
     SignUpComponent,
     DashboardComponent,
     VerifyEmailComponent,
-    FiltersComponent,
     CreateQuestionComponent,
     HeaderComponent,
     EditQuestionComponent,
@@ -47,7 +45,6 @@ import { FiltersPipe } from './shared/pipes/filters.pipe';
     FiltersPipe
   ],
   imports: [
-    // ReactiveFormsModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
     CommonModule,

@@ -35,9 +35,16 @@
 
 .nav-link
   padding: 1.5rem 1rem
-  border-bottom: 1px solid #dde0e2
   cursor: pointer
 
+
+.logo
+  font-family: Helvetica
+  cursor: pointer
+
+.custom-range
+  width: 40%
+  margin: 0 10%
 
 .sidebar .nav-link.active,
 .sidebar a:hover,
@@ -60,10 +67,16 @@ a:not([href]):not([tabindex]):hover
   width: 96.5%
   box-sizing: border-box
 
-.sidebar-sticky:hover .hideLi
+.dropdown:hover .dropdown-menu
   display: block
 
+.dropdown-menu
+  width: 100%
 
+.navbar
+  background-clip: border-box
+  border: 1px solid rgba(0,0,0,.125)
+  margin-top: 1%
 
 .add-quastion-btn
   font-weight: 500
@@ -79,8 +92,7 @@ img
   width: 60px
 
 .question
-  border: 1px solid black
-  margin: 2% 4%
+  margin-bottom: 1%
 
 main
   margin: 1rem 0
@@ -88,7 +100,7 @@ main
 .title-list-question
   text-align: center
   border-bottom: 1px solid black
-  font-size: 2rem
+  font-size: 1.5rem
   width: 100%
   text-decoration: none
   color: black
@@ -96,12 +108,28 @@ main
 a .title-list-question:hover
   background: #E6E6FA
 
+.card
+  height:100%
+
 .tags-list-question
   float: right
 
 .filters
   display: flex
   align-items: center
+
+.form-control
+  padding: .375rem .25rem
+
+.filter
+  width: auto
+
+.centerLine
+  margin: 0 1rem 0 0
+
+.sort-arrow
+  margin-right: 1rem
+  cursor: pointer
 
 .sort
   display: flex
@@ -144,13 +172,12 @@ a .title-list-question:hover
   width: 4rem
   height: 4rem
   border-radius: 50%
-  background: blue
   color: white
   font-size: 2.5rem
   text-align: center
   position: absolute
-  bottom: 10%
-  right: 10%
+  bottom: 5%
+  right: 5%
 
 
 .pointer:hover

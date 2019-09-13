@@ -1,11 +1,10 @@
-import { Component, OnInit, NgZone  } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
 import { OtherService } from "../../shared/services/other.service";
 import { Question } from '../../shared/services/question';
-import { User } from '../../shared/services/user';   // Student data type interface class
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';  // Firebase modules for Database, Data list and Single object
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { User } from '../../shared/services/user';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,17 +27,17 @@ export class DashboardComponent implements OnInit {
     private firestore: AngularFirestore,
   ) { }
 
-  ngOnInit() {this.getQuestion();
+  ngOnInit() {
+    this.getQuestion();
 
-    let uid=JSON.parse(localStorage.getItem('user')).uid;
+    let uid = JSON.parse(localStorage.getItem('user')).uid;
     this.firestore.doc(`users/${uid}`).get().subscribe(data => {
-      this.user = {...data.data(), uid: uid} as User;
-      this.isAdmin=this.user.isAdmin;
-      console.log(this.isAdmin);
-  });
-   }
+      this.user = { ...data.data(), uid: uid } as User;
+      this.isAdmin = this.user.isAdmin;
+    });
+  }
 
-   orderBy(state: string) {
+  orderBy(state: string) {
     this.sortDirection = state;
   }
 
@@ -46,20 +45,20 @@ export class DashboardComponent implements OnInit {
     this.typeFilter = state;
   }
 
-getQuestion = () =>{
-   this.otherService
-   .getQuestion()
-   .subscribe(res =>(this.allQuestions = res));
-}
+  getQuestion = () => {
+    this.otherService
+      .getQuestion()
+      .subscribe(res => (this.allQuestions = res));
+  }
 
 
-deleteQuestion(question){
-  this.otherService.deleteQuestion(question);
-}
+  deleteQuestion(question) {
+    this.otherService.deleteQuestion(question);
+  }
 
-approveQuestion2(question) {
-  this.otherService.approveQuestion2(question);
-}
+  approveQuestion2(question) {
+    this.otherService.approveQuestion2(question);
+  }
 }
 
 

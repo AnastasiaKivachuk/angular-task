@@ -39,10 +39,6 @@ export class OpenQuestionComponent implements OnInit {
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;
           this.comments = this.question.comments;
-          // this.comments.isResolved=this.comments.sort(comment => {
-            
-          //   // console.log(comment.date.seconds * 1000);           comment.date=  comment.date.seconds * 1000;
-          //   })
       });
 
 
@@ -50,7 +46,6 @@ export class OpenQuestionComponent implements OnInit {
       this.firestore.doc(`users/${uid}`).get().subscribe(data => {
         this.user = {...data.data(), uid: uid} as User;
         this.isAdmin=this.user.isAdmin;
-        // console.log(this.isAdmin);
     });
 }
 
@@ -74,7 +69,6 @@ addNewComment(form: NgForm) {
     isResolved: false
   };
   this.question.comments.push(newComment);
-  console.log(newComment.date);
   form.reset();
   this.otherService.addCommentToQuestion(this.question.comments, this.route.snapshot.paramMap.get("id"));
   this.router.navigate([`/open-question/${this.question.id}`]);
@@ -83,7 +77,6 @@ addNewComment(form: NgForm) {
 changeIsResolved(target, id: number) {
   let isAnswered = false;
     this.comments[id].isResolved = target.checked;
-    console.log(target.checked);
     this.otherService.updateCommentsInDatabase(this.comments, this.route.snapshot.paramMap.get("id"));
     this.comments.forEach(comment => {
       if (comment.isResolved) {
@@ -91,8 +84,6 @@ changeIsResolved(target, id: number) {
       }
     });
     this.otherService.updateIsAnswered(isAnswered, this.route.snapshot.paramMap.get("id"));
-    // this.router.navigate([`/open-question/${this.route.snapshot.paramMap.get("id")}`]);
-    // this.router.navigate([`/open-question/${this.question.id}`]);
 }
 }
 

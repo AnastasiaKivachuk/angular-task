@@ -4,11 +4,7 @@ import { Comments } from "../services/question";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from "@angular/router";
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
-import { database } from "firebase/app";
-import { FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute } from '@angular/router';
-import { from, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -18,14 +14,12 @@ export class OtherService {
   comments: Comments[];
   id: string;
   constructor(private firestore: AngularFirestore,
-    public router: Router,  // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public router: Router,
+    public afAuth: AngularFireAuth,
     private route: ActivatedRoute
   ) { }
 
 
-
-  //Firestore CRUD actions example
   createQuestion(question: Question) {
     return new Promise<any>((resolve, reject) => {
       this.firestore
@@ -87,15 +81,15 @@ export class OtherService {
 
 
   approveQuestion(question) {
-      return this.firestore.collection("questions").doc(question.id).update({
-        isApproved: true,
+    return this.firestore.collection("questions").doc(question.id).update({
+      isApproved: true,
+    })
+      .then(function () {
+        console.log("Document successfully updated!");
       })
-        .then(function () {
-          console.log("Document successfully updated!");
-        })
-        .catch(function (error) {
-          console.error("Error updating document: ", error);
-        });
+      .catch(function (error) {
+        console.error("Error updating document: ", error);
+      });
   }
   approveQuestion2(question) {
     return this.firestore.collection("questions").doc(question.payload.doc.id).update({
@@ -107,39 +101,39 @@ export class OtherService {
       .catch(function (error) {
         console.error("Error updating document: ", error);
       });
-}
-addCommentToQuestion(comments: Comments[], id: string) {
-  return this.firestore.collection("questions").doc(id).update({
-    comments
-  })
-    .then(function () {
-      console.log("Document successfully updated!");
+  }
+  addCommentToQuestion(comments: Comments[], id: string) {
+    return this.firestore.collection("questions").doc(id).update({
+      comments
     })
-    .catch(function (error) {
-      console.error("Error updating document: ", error);
-    });
-}
+      .then(function () {
+        console.log("Document successfully updated!");
+      })
+      .catch(function (error) {
+        console.error("Error updating document: ", error);
+      });
+  }
 
-updateIsAnswered(isAnswered: boolean, id: string) {
-  return this.firestore.collection('questions').doc(id).update({
+  updateIsAnswered(isAnswered: boolean, id: string) {
+    return this.firestore.collection('questions').doc(id).update({
       isAnswered: isAnswered
     }).then(function () {
       console.log("Document successfully updated!");
     })
-    .catch(function (error) {
-      console.error("Error updating document: ", error);
-    });
-}
+      .catch(function (error) {
+        console.error("Error updating document: ", error);
+      });
+  }
 
-updateCommentsInDatabase(comments: Comment[], id: string) {
-  return this.firestore.collection('questions').doc(id).update({
+  updateCommentsInDatabase(comments: Comment[], id: string) {
+    return this.firestore.collection('questions').doc(id).update({
       comments
     }).then(function () {
       console.log("Document successfully updated!");
     })
-    .catch(function (error) {
-      console.error("Error updating document: ", error);
-    });
-}
+      .catch(function (error) {
+        console.error("Error updating document: ", error);
+      });
+  }
 
 }

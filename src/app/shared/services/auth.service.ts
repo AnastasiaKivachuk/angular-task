@@ -10,12 +10,12 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 
 export class AuthService {
-  userData: any; // Save logged in user data
+  userData: any;
   constructor(
-    public afs: AngularFirestore,   // Inject Firestore service
-    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public afs: AngularFirestore,
+    public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public ngZone: NgZone,
 
   ) {
     /* Saving user data in localstorage when
@@ -61,9 +61,9 @@ export class AuthService {
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
     return this.afAuth.auth.currentUser.sendEmailVerification()
-    .then(() => {
-      this.router.navigate(['verify-email-address']);
-    })
+      .then(() => {
+        this.router.navigate(['verify-email-address']);
+      })
   }
 
   // Returns true when user is looged in and email is verified
@@ -80,47 +80,47 @@ export class AuthService {
   // Auth logic to run auth providers
   AuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
-    .then((result) => {
-       this.ngZone.run(() => {
-          this.router.navigate(['dashboard']);
-        })
-      this.SetUserData(result.user);
-    }).catch((error) => {
-      window.alert(error)
-    })
-  }
-
-  FacebookAuth(){
-    return new Promise<any>((resolve, reject) => {
-      let provider = new auth.FacebookAuthProvider();
-      this.afAuth.auth
-      .signInWithPopup(provider)
-      .then(res => {
+      .then((result) => {
         this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         })
-      }, err => {
-        console.log(err);
-        reject(err);
+        this.SetUserData(result.user);
+      }).catch((error) => {
+        window.alert(error)
       })
-    })
- }
+  }
 
- GithubAuth(){
-  return new Promise<any>((resolve, reject) => {
-    let provider = new auth.GithubAuthProvider();
-    this.afAuth.auth
-    .signInWithPopup(provider)
-    .then(res => {
-      this.ngZone.run(() => {
-        this.router.navigate(['dashboard']);
-      })
-    }, err => {
-      console.log(err);
-      reject(err);
+  FacebookAuth() {
+    return new Promise<any>((resolve, reject) => {
+      let provider = new auth.FacebookAuthProvider();
+      this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          this.ngZone.run(() => {
+            this.router.navigate(['dashboard']);
+          })
+        }, err => {
+          console.log(err);
+          reject(err);
+        })
     })
-  })
-}
+  }
+
+  GithubAuth() {
+    return new Promise<any>((resolve, reject) => {
+      let provider = new auth.GithubAuthProvider();
+      this.afAuth.auth
+        .signInWithPopup(provider)
+        .then(res => {
+          this.ngZone.run(() => {
+            this.router.navigate(['dashboard']);
+          })
+        }, err => {
+          console.log(err);
+          reject(err);
+        })
+    })
+  }
 
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
@@ -133,50 +133,27 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      isAdmin: (user.email === 'm8062852@gmail.com') ? true: false,
+      isAdmin: (user.email === 'm8062852@gmail.com') ? true : false,
       emailVerified: user.emailVerified,
+      block: user.block
     };
-  console.log(userData.isAdmin );
     return userRef.set(userData, {
       merge: true
     })
-
   }
 
-  // SetUserData2(user) {
-  //   const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
-  //   const userData: User = {
-  //     uid: user.uid,
-  //     email: user.email,
-  //     displayName: user.displayName,
-  //     photoURL: user.photoURL,
-  //     isAdmin: (user.email === 'm8062852@gmail.com') ? true: false,
-  //     emailVerified: user.emailVerified,
-  //   };
-  // console.log(userData);
-  //   return userRef.set(userData, {
-  //     merge: true
-  //   })
 
-  // }
 
   // Sign out
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);this.router.navigate(['sign-in']);
+      this.router.navigate(['sign-in']); this.router.navigate(['sign-in']);
     })
   }
 
-  // getAdmin(){
-  //   console.log(JSON.parse(localStorage.getItem('user')));
-  //   this.firestore.doc(`users/${localStorage.getItem('user')).uid}`).get().subscribe(data => {
-  //     this.question = {...data.data(), id: questionId} as Question;
-  //     this.comments = this.question.comments;
-  //     console.log(this.comments);
-  // });
-  // }
-  UserProfile(){
+
+  UserProfile() {
     this.router.navigate(['user-profile']);
   }
 

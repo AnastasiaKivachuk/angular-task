@@ -2,11 +2,11 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { OtherService } from "../../shared/services/other.service";
 import { AuthService } from "../../shared/services/auth.service";
 import { Router } from "@angular/router";
-import {Question} from "../../shared/services/question";
-import {User} from "../../shared/services/user";
-import {NgForm} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Question } from "../../shared/services/question";
+import { User } from "../../shared/services/user";
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-edit-question',
@@ -15,13 +15,9 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 })
 export class EditQuestionComponent implements OnInit {
   id: string;
-  // private subId: Subscription;
   question: Question;
   comments: Comment[];
-  isLoading = true;
-  // loadingSub: Subscription;
   user: User;
-  visibility = false;
   form: NgForm;
 
   constructor(
@@ -34,26 +30,25 @@ export class EditQuestionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    let questionId=this.route.snapshot.paramMap.get("id");
+    let questionId = this.route.snapshot.paramMap.get("id");
 
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
-          this.question = {...data.data(), id: questionId} as Question;})
+      this.question = { ...data.data(), id: questionId } as Question;
+    })
 
   }
 
 
   updateQuestion(form: NgForm) {
     const question: Question = {
-    title: form.value.title,
-    text: form.value.text,
-    HTML: form.value.HTML,
-    CSS: form.value.CSS,
-    JS: form.value.JS,
-    id: this.route.snapshot.paramMap.get("id")
+      title: form.value.title,
+      text: form.value.text,
+      HTML: form.value.HTML,
+      CSS: form.value.CSS,
+      JS: form.value.JS,
+      id: this.route.snapshot.paramMap.get("id")
     };
-    console.log(question.id);
     this.otherService.updateQuestion(question);
-    console.log(question);
     this.router.navigate([`/open-question/${question.id}`]);
   }
 }
