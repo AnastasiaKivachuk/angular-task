@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public dark = JSON.parse(localStorage.getItem('dark'));
 }
 
 

@@ -72,6 +72,21 @@ a:not([href]):not([tabindex]):hover
 
 .dropdown-menu
   width: 100%
+  margin: 0
+
+.light
+  height: 1rem
+  width: 1rem
+  background: #F5F5F5
+  border: 1px solid black
+  display: inline-block
+
+.dark
+  height: 1rem
+  width: 1rem
+  background: #696969
+  border: 1px solid black
+  display: inline-block
 
 .navbar
   background-clip: border-box
@@ -103,10 +118,12 @@ main
   font-size: 1.5rem
   width: 100%
   text-decoration: none
-  color: black
 
-a .title-list-question:hover
-  background: #E6E6FA
+.title-list-question:hover
+  cursor: pointer
+
+.dropdown-toggle
+  color: inherit
 
 .card
   height:100%
@@ -141,6 +158,10 @@ a .title-list-question:hover
   border: 1px solid #dde0e2
   cursor: pointer
   padding: 0.5rem 0.5rem
+
+.light, .dark, .block, .string
+  cursor: pointer
+  margin: 0 1rem
 
 .fa-check
   color: green

@@ -1,4 +1,5 @@
-<div class="navbar navbar-expand-lg navbar-light bg-light">
+<div [ngClass]="{'navbar-light bg-light': dark === false,
+'text-white navbar-dark bg-dark': dark === true}" class="navbar navbar-expand-lg">
     <div class="col-md-1">
       <h1 class="logo" (click)="otherService.GoToHome()">LOGO</h1>
     </div>
@@ -28,7 +29,8 @@
 
 
 
-<div class="card bg-light mb-3 col-md-8 offset-2" *ngIf="question">
+<div [ngClass]="{'bg-light': dark === false,
+'text-white bg-secondary': dark === true}" class="card mb-3 col-md-8 offset-2" *ngIf="question">
     <div class="card-body"> <div class="header-question">
         <div class="author-question">{{question.author}}</div>
         <h2 class="title-question">{{ question.title}}</h2>
@@ -52,8 +54,7 @@
           <a  class="button-list-question" (click)="approveQuestion(question)" *ngIf="isAdmin" [hidden]="question.isApproved">
             <i class="fa fa-check"></i>Approve
           </a>
-          <span class="tags-list-question">{{ authService.userData.isAdmin }}</span>
-          <a class="button-list-question" [routerLink]="['/edit-question', question.id]" *ngIf="authService.userData.email == question.author">
+          <a class="button-list-question edit" [routerLink]="['/edit-question', question.id]" *ngIf="authService.userData.email == question.author">
             <i class="fa fa-paint-brush"></i>Edit
           </a>
           <a class="button-list-question" (click)="deleteQuestion(question)" *ngIf="isAdmin" [hidden]="question.isApproved" >

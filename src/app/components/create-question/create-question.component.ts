@@ -23,7 +23,7 @@ export class CreateQuestionComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  public dark = JSON.parse(localStorage.getItem('dark'));
   author = JSON.parse(localStorage.getItem('user')).email;
 
   addQuestion(form: NgForm) {

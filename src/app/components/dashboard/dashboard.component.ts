@@ -35,8 +35,11 @@ export class DashboardComponent implements OnInit {
       this.user = { ...data.data(), uid: uid } as User;
       this.isAdmin = this.user.isAdmin;
     });
-  }
 
+
+  }
+ public string = JSON.parse(localStorage.getItem('string'));
+ public dark = JSON.parse(localStorage.getItem('dark'));
   orderBy(state: string) {
     this.sortDirection = state;
   }
@@ -59,6 +62,23 @@ export class DashboardComponent implements OnInit {
   approveQuestion2(question) {
     this.otherService.approveQuestion2(question);
   }
+
+  makeStringPosition(){
+        localStorage.setItem('string', JSON.stringify(true));
+        // this.otherService.GoToHome();
+  }
+  makeBlockPosition(){
+    localStorage.setItem('string', JSON.stringify(false));
+    this.otherService.GoToHome();
+  }
+  makeLigthTheme(){
+    localStorage.setItem('dark', JSON.stringify(false));
+    // this.otherService.GoToHome();
+}
+makeDarkTheme(){
+localStorage.setItem('dark', JSON.stringify(true));
+// this.otherService.GoToHome();
+}
 }
 
 

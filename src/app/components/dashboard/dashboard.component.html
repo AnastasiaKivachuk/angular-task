@@ -1,6 +1,7 @@
 <app-header></app-header>
-<div class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="col-md-7 filters row">
+<div [ngClass]="{'navbar-light bg-light': dark === false,
+'text-white navbar-dark bg-dark': dark === true}"class="navbar navbar-expand-lg ">
+  <div class="col-md-8 filters row">
     <h6 class="centerLine"><i class="fa fa-filter"></i>Filters</h6>
     <select class="form-control filter" (change)="filterBy($event.target.value)">
       <option value="" disabled selected>Answered/Not</option>
@@ -27,7 +28,7 @@
       <option value="lastWeek">Last week</option>
       <option value="lastMonth">Last month</option>
     </select>
-    <button class="button-list-question " (click)="filterBy('')"><i class="fa fa-trash-o"></i>Clear</button>
+    <button class="btn btn-outline-primary" (click)="filterBy('')"><i class="fa fa-trash-o"></i>Clear</button>
   </div>
   <div class="col-md-2 sort ">
 
@@ -36,20 +37,19 @@
 
     <a class="sort-arrow" (click)="orderBy('new')"><i class="fa fa-sort-desc"></i>new</a>
   </div>
-  <div class="col-md-2 offset-1">
+  <div class="col-md-2">
     <div class="dropdown" *ngIf="authService.userData as user">
-      <button class="btn dropdown-toggle" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
+      <button class="btn dropdown-toggle">
         Settings<i class="fa fa-cog"></i>
       </button>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <div class="dropdown-item">theme
-<a class=""
+        <div class="dropdown-item">
+          <div class="light" (click)="makeLigthTheme()"></div>
+          <div class="dark" (click)="makeDarkTheme()"></div>
         </div>
         <div class="dropdown-item">
-          <i class="fa fa-th"></i>
-          <input type="range" class="custom-range" min="0" max="1" >
-          <i class="fa fa-list"></i>
+          <i class="fa fa-th block" (click)="makeBlockPosition()"  ></i>
+          <i class="fa fa-list string" (click)="makeStringPosition()"  ></i>
         </div>
 
       </div>
@@ -57,11 +57,13 @@
   </div>
 </div>
 <main role="main" class="row">
-  <div class="question col-md-3" *ngFor="let question of allQuestions| orderBy: sortDirection | filters: typeFilter"
+  <div [ngClass]="{'col-md-3': string === false,
+  'col-md-12': string === true}" class="question" *ngFor="let question of allQuestions| orderBy: sortDirection | filters: typeFilter"
     [hidden]="!question.payload.doc.data().isApproved && !isAdmin">
-    <div class="card bg-light mb-3">
-      <div class="card-header"><a [routerLink]="['/open-question', question.payload.doc.id]"
-          class="title-list-question">{{ question.payload.doc.data().title }}</a>
+    <div [ngClass]="{'bg-light': dark === false,
+    'text-white bg-secondary': dark === true}" class="card  mb-3">
+      <div class="card-header"[routerLink]="['/open-question', question.payload.doc.id]"
+          class="title-list-question">{{ question.payload.doc.data().title }}
         <i class="fa fa-check" [hidden]="!question.payload.doc.data().isAnswered"></i></div>
       <div class="card-body">
         <div class="second-line">

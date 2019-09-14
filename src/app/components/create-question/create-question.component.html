@@ -1,4 +1,5 @@
-<div class="navbar navbar-expand-lg navbar-light bg-light">
+<div [ngClass]="{'navbar-light bg-light': dark === false,
+'text-white navbar-dark bg-dark': dark === true}" class="navbar navbar-expand-lg">
   <div class="col-md-1">
     <h1 class="logo" (click)="otherService.GoToHome()">LOGO</h1>
   </div>
@@ -28,7 +29,8 @@
   </div>
 </div>
 
-<div class="card bg-light mb-3 col-md-6 offset-3">
+<div [ngClass]="{'bg-light': dark === false,
+'text-white bg-secondary': dark === true}" class="card mb-3 col-md-6 offset-3">
   <div class="card-header title-list-question">New question<i class="fa fa-close close"
       (click)="otherService.GoToHome()"></i></div>
 

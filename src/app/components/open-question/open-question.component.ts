@@ -85,5 +85,6 @@ changeIsResolved(target, id: number) {
     });
     this.otherService.updateIsAnswered(isAnswered, this.route.snapshot.paramMap.get("id"));
 }
+public dark = JSON.parse(localStorage.getItem('dark'));
 }
 

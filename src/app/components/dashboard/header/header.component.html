@@ -1,4 +1,5 @@
-<div class="navbar navbar-expand-lg navbar-light bg-light">
+<div [ngClass]="{'navbar-light bg-light': dark === false,
+'text-white navbar-dark bg-dark': dark === true}" class="navbar navbar-expand-lg ">
   <div class="col-md-1">
     <h1 class="logo" (click)="otherService.GoToHome()">LOGO</h1>
   </div>

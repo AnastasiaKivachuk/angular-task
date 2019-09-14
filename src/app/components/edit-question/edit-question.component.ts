@@ -37,7 +37,7 @@ export class EditQuestionComponent implements OnInit {
     })
 
   }
-
+  public dark = JSON.parse(localStorage.getItem('dark'));
 
   updateQuestion(form: NgForm) {
     const question: Question = {
