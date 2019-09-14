@@ -134,8 +134,7 @@ export class AuthService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       isAdmin: (user.email === 'm8062852@gmail.com') ? true : false,
-      emailVerified: user.emailVerified,
-      block: user.block
+      emailVerified: user.emailVerified
     };
     return userRef.set(userData, {
       merge: true
