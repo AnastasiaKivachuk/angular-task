@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
     public ngZone: NgZone,
     public otherService: OtherService,
     private firestore: AngularFirestore,
+
   ) { }
 
   ngOnInit() {
@@ -65,19 +66,21 @@ export class DashboardComponent implements OnInit {
 
   makeStringPosition(){
         localStorage.setItem('string', JSON.stringify(true));
-        // this.otherService.GoToHome();
+        this.string=JSON.parse(localStorage.getItem('string'));
   }
   makeBlockPosition(){
     localStorage.setItem('string', JSON.stringify(false));
-    this.otherService.GoToHome();
+    this.string= JSON.parse(localStorage.getItem('string'));
   }
-  makeLigthTheme(){
+  makeLightTheme(){
     localStorage.setItem('dark', JSON.stringify(false));
-    // this.otherService.GoToHome();
+
+    this.dark = JSON.parse(localStorage.getItem('dark'));
 }
 makeDarkTheme(){
 localStorage.setItem('dark', JSON.stringify(true));
-// this.otherService.GoToHome();
+
+this.dark = JSON.parse(localStorage.getItem('dark'));
 }
 }
 

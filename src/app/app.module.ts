@@ -15,7 +15,6 @@ import {AuthService} from './shared/services/auth.service';
 import {OtherService} from './shared/services/other.service';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
-import { HeaderComponent } from './components/dashboard/header/header.component';
 import { FormsModule }   from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
@@ -36,7 +35,6 @@ import { FiltersPipe } from './shared/pipes/filters.pipe';
     DashboardComponent,
     VerifyEmailComponent,
     CreateQuestionComponent,
-    HeaderComponent,
     EditQuestionComponent,
     OpenQuestionComponent,
     UserProfileComponent,
