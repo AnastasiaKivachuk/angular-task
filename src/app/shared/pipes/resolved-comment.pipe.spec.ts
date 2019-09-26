@@ -5,4 +5,9 @@ describe('ResolvedCommentPipe', () => {
     const pipe = new ResolvedCommentPipe();
     expect(pipe).toBeTruthy();
   });
+
+//   it('reverse success', () => {
+//     expect(pipe.transform('abcde')).toBeTruthy('edcba');
+// });
+
 });

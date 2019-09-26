@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {AngularFirestore} from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,7 +54,7 @@ import { FiltersPipe } from './shared/pipes/filters.pipe';
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [AuthService, OtherService],
+  providers: [AuthService, OtherService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

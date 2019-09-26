@@ -13,7 +13,7 @@ import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';
   styleUrls: ['./user-profile.component.sass']
 })
 export class UserProfileComponent implements OnInit {
-
+public user;
   constructor(
     public authService: AuthService,
     public router: Router,
@@ -23,4 +23,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
   }
 
+  goHome(){
+    this.otherService.GoToHome();
+  }
 }
