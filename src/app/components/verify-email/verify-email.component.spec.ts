@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthService } from "../../shared/services/auth.service";
+import {AngularFirestore} from '@angular/fire/firestore';
 import { VerifyEmailComponent } from './verify-email.component';
 
 describe('VerifyEmailComponent', () => {
@@ -9,7 +10,7 @@ describe('VerifyEmailComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ VerifyEmailComponent ],
-      providers:[AuthService]
+      providers:[AuthService, AngularFirestore]
     })
     .compileComponents();
   }));

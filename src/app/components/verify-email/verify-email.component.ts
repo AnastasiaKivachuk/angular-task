@@ -7,7 +7,7 @@ import { AuthService } from "../../shared/services/auth.service";
   styleUrls: ['./verify-email.component.sass']
 })
 export class VerifyEmailComponent implements OnInit {
-
+  public AuthService;
   constructor(public authService: AuthService) { }
 
   ngOnInit() {
