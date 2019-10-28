@@ -1,9 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AuthService } from "../../shared/services/auth.service";
-import { Router } from "@angular/router";
-import { OtherService } from "../../shared/services/other.service";
-import { Question } from '../../shared/services/question';  // Student data type interface class
-import { AngularFireDatabase, AngularFireObject } from '@angular/fire/database';  // Firebase modules for Database, Data list and Single object
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+import { OtherService } from '../../shared/services/other.service';
 
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AuthService } from "../../shared/services/auth.service";
-import { Router } from "@angular/router";
-import { OtherService } from "../../shared/services/other.service";
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+import { OtherService } from '../../shared/services/other.service';
 import { Question } from '../../shared/services/question';
 import { User } from '../../shared/services/user';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -15,32 +15,31 @@ export class DashboardComponent implements OnInit {
   id: string;
   question: Question;
   user: User;
-  isAdmin;
-  allQuestions;
+  isAdmin: boolean;
+  allQuestions: any;
   sortDirection = 'new';
-  typeFilter;
+  typeFilter: string;
+
   constructor(
     public authService: AuthService,
     public router: Router,
     public ngZone: NgZone,
     public otherService: OtherService,
-    private firestore: AngularFirestore,
-
+    private firestore: AngularFirestore
   ) { }
 
-  ngOnInit() {
-    this.getQuestion();
+  public string = JSON.parse(localStorage.getItem('string'));
+  public dark = JSON.parse(localStorage.getItem('dark'));
 
-    let uid = JSON.parse(localStorage.getItem('user')).uid;
+  ngOnInit() {
+    const uid = JSON.parse(localStorage.getItem('user')).uid;
+    this.getQuestion();
     this.firestore.doc(`users/${uid}`).get().subscribe(data => {
-      this.user = { ...data.data(), uid: uid } as User;
+      this.user = { ...data.data(), uid } as User;
       this.isAdmin = this.user.isAdmin;
     });
-
-
   }
- public string = JSON.parse(localStorage.getItem('string'));
- public dark = JSON.parse(localStorage.getItem('dark'));
+
   orderBy(state: string) {
     this.sortDirection = state;
   }
@@ -55,33 +54,33 @@ export class DashboardComponent implements OnInit {
       .subscribe(res => (this.allQuestions = res));
   }
 
-
-  deleteQuestion(question) {
+  deleteQuestion(question: any) {
     this.otherService.deleteQuestion(question);
   }
 
-  approveQuestion2(question) {
+  approveQuestion2(question: any) {
     this.otherService.approveQuestion2(question);
   }
 
-  makeStringPosition(){
-        localStorage.setItem('string', JSON.stringify(true));
-        this.string=JSON.parse(localStorage.getItem('string'));
+  makeStringPosition() {
+    localStorage.setItem('string', JSON.stringify(true));
+    this.string = JSON.parse(localStorage.getItem('string'));
   }
-  makeBlockPosition(){
+
+  makeBlockPosition() {
     localStorage.setItem('string', JSON.stringify(false));
-    this.string= JSON.parse(localStorage.getItem('string'));
+    this.string = JSON.parse(localStorage.getItem('string'));
   }
-  makeLightTheme(){
+
+  makeLightTheme() {
     localStorage.setItem('dark', JSON.stringify(false));
-
     this.dark = JSON.parse(localStorage.getItem('dark'));
-}
-makeDarkTheme(){
-localStorage.setItem('dark', JSON.stringify(true));
+  }
 
-this.dark = JSON.parse(localStorage.getItem('dark'));
-}
+  makeDarkTheme() {
+    localStorage.setItem('dark', JSON.stringify(true));
+    this.dark = JSON.parse(localStorage.getItem('dark'));
+  }
 }
 
 

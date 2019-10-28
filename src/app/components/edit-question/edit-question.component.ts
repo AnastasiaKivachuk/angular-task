@@ -1,9 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { OtherService } from "../../shared/services/other.service";
-import { AuthService } from "../../shared/services/auth.service";
-import { Router } from "@angular/router";
-import { Question } from "../../shared/services/question";
-import { User } from "../../shared/services/user";
+import { OtherService } from '../../shared/services/other.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+import { Question } from '../../shared/services/question';
+import { User } from '../../shared/services/user';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -19,7 +19,7 @@ export class EditQuestionComponent implements OnInit {
   comments: Comment[];
   user: User;
   form: NgForm;
-
+  dark: any = JSON.parse(localStorage.getItem('dark'));
   constructor(
     public otherService: OtherService,
     public authService: AuthService,
@@ -27,17 +27,15 @@ export class EditQuestionComponent implements OnInit {
     public ngZone: NgZone,
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
+
   ) { }
 
   ngOnInit() {
-    let questionId = this.route.snapshot.paramMap.get("id");
-
+    const questionId = this.route.snapshot.paramMap.get('id');
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
       this.question = { ...data.data(), id: questionId } as Question;
-    })
-
+    });
   }
-  public dark = JSON.parse(localStorage.getItem('dark'));
 
   updateQuestion(form: NgForm) {
     const question: Question = {
@@ -46,7 +44,7 @@ export class EditQuestionComponent implements OnInit {
       HTML: form.value.HTML,
       CSS: form.value.CSS,
       JS: form.value.JS,
-      id: this.route.snapshot.paramMap.get("id")
+      id: this.route.snapshot.paramMap.get('id')
     };
     this.otherService.updateQuestion(question);
     this.router.navigate([`/open-question/${question.id}`]);

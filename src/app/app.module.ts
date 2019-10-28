@@ -15,7 +15,7 @@ import {AuthService} from './shared/services/auth.service';
 import {OtherService} from './shared/services/other.service';
 import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EditQuestionComponent } from './components/edit-question/edit-question.component';
 import { OpenQuestionComponent } from './components/open-question/open-question.component';

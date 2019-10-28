@@ -11,16 +11,15 @@ export class FiltersPipe implements PipeTransform {
     if (args === 'Answered') {
       return array.filter((item) => {
         if (item.payload.doc.data().isAnswered) {
-          return item
+          return item;
         }
-
       });
     }
 
     if (args === 'NotAnswered') {
       return array.filter((item: any) => {
         if (item.payload.doc.data().isAnswered === false) {
-          return item
+          return item;
         }
       });
     }
@@ -28,16 +27,15 @@ export class FiltersPipe implements PipeTransform {
     if (args === 'Approved') {
       return array.filter((item) => {
         if (item.payload.doc.data().isApproved) {
-          return item
+          return item;
         }
-
       });
     }
 
     if (args === 'NotApproved') {
       return array.filter((item: any) => {
         if (item.payload.doc.data().isApproved === false) {
-          return item
+          return item;
         }
       });
     }
@@ -45,21 +43,23 @@ export class FiltersPipe implements PipeTransform {
     if (args === 'HTML') {
       return array.filter((item) => {
         if (item.payload.doc.data().HTML) {
-          return item
+          return item;
         }
       });
     }
+
     if (args === 'CSS') {
       return array.filter((item) => {
         if (item.payload.doc.data().CSS) {
-          return item
+          return item;
         }
       });
     }
+
     if (args === 'JS') {
       return array.filter((item) => {
         if (item.payload.doc.data().JS) {
-          return item
+          return item;
         }
       });
     }
@@ -67,14 +67,15 @@ export class FiltersPipe implements PipeTransform {
     if (args === 'myQuestion') {
       return array.filter((item) => {
         if (item.payload.doc.data().author == JSON.parse(localStorage.getItem('user')).email) {
-          return item
+          return item;
         }
       });
     }
+
     if (args === 'JS') {
       return array.filter((item) => {
         if (item.payload.doc.data().JS) {
-          return item
+          return item;
         }
       });
     }
@@ -82,18 +83,18 @@ export class FiltersPipe implements PipeTransform {
     if (args === 'myQuestion') {
       return array.filter((item) => {
         if (item.payload.doc.data().author == JSON.parse(localStorage.getItem('user')).email) {
-          return item
+          return item;
         }
       });
     }
 
     if (args === 'lastWeek') {
       return array.filter((item) => {
-        let BDdate = item.payload.doc.data().date.seconds * 1000;
-        let now = new Date().getTime();
-        let oneWeek = 6.048e+8;
+        const BDdate = item.payload.doc.data().date.seconds * 1000;
+        const now = new Date().getTime();
+        const oneWeek = 6.048e+8;
         if (now - BDdate <= oneWeek) {
-          return item
+          return item;
         }
       });
     }
@@ -102,11 +103,11 @@ export class FiltersPipe implements PipeTransform {
 
     if (args === 'lastMonth') {
       return array.filter((item) => {
-        let BDdate = item.payload.doc.data().date.seconds * 1000;
-        let now = new Date().getTime();
-        let oneMonth = 2.628e+9;
+        const BDdate = item.payload.doc.data().date.seconds * 1000;
+        const now = new Date().getTime();
+        const oneMonth = 2.628e+9;
         if (now - BDdate <= oneMonth) {
-          return item
+          return item;
         }
       });
     }

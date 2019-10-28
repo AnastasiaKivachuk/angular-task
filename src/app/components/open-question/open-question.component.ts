@@ -1,10 +1,10 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { OtherService } from "../../shared/services/other.service";
-import { AuthService } from "../../shared/services/auth.service";
-import { Router } from "@angular/router";
-import {Question} from "../../shared/services/question";
-import {Comments} from "../../shared/services/question";
-import {User} from "../../shared/services/user";
+import { OtherService } from '../../shared/services/other.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+import {Question} from '../../shared/services/question';
+import {Comments} from '../../shared/services/question';
+import {User} from '../../shared/services/user';
 import {NgForm} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -18,12 +18,13 @@ import * as moment from 'moment';
 export class OpenQuestionComponent implements OnInit {
   id: string;
   question: Question;
-  comments;
+  comments: any;
   isLoading = true;
   user: User;
   visibility = false;
-  isAdmin;
-  normalDate;
+  isAdmin: boolean;
+  normalDate: any;
+  dark: any = JSON.parse(localStorage.getItem('dark'));
   constructor(
     public otherService: OtherService,
     public authService: AuthService,
@@ -31,31 +32,31 @@ export class OpenQuestionComponent implements OnInit {
     public ngZone: NgZone,
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
+
   ) { }
 
   ngOnInit() {
-    let questionId=this.route.snapshot.paramMap.get("id");
-
+    const questionId = this.route.snapshot.paramMap.get('id');
     this.firestore.doc(`questions/${questionId}`).get().subscribe(data => {
           this.question = {...data.data(), id: questionId} as Question;
           this.comments = this.question.comments;
       });
 
 
-      let uid=JSON.parse(localStorage.getItem('user')).uid;
-      this.firestore.doc(`users/${uid}`).get().subscribe(data => {
-        this.user = {...data.data(), uid: uid} as User;
-        this.isAdmin=this.user.isAdmin;
+    const uid = JSON.parse(localStorage.getItem('user')).uid;
+    this.firestore.doc(`users/${uid}`).get().subscribe(data => {
+      this.user = {...data.data(), uid} as User;
+      this.isAdmin = this.user.isAdmin;
     });
 }
 
-deleteQuestion(question){
-  this.otherService.deleteQuestion2(question);
-  this.router.navigate(['dashboard']);
+deleteQuestion(question: any) {
+    this.otherService.deleteQuestion2(question);
+    this.router.navigate(['dashboard']);
 }
 
 
-approveQuestion(question) {
+approveQuestion(question: any) {
   this.otherService.approveQuestion(question);
   this.question.isApproved = true;
   this.router.navigate(['dashboard']);
@@ -70,21 +71,20 @@ addNewComment(form: NgForm) {
   };
   this.question.comments.push(newComment);
   form.reset();
-  this.otherService.addCommentToQuestion(this.question.comments, this.route.snapshot.paramMap.get("id"));
+  this.otherService.addCommentToQuestion(this.question.comments, this.route.snapshot.paramMap.get('id'));
   this.router.navigate([`/open-question/${this.question.id}`]);
 
 }
-changeIsResolved(target, id: number) {
+changeIsResolved(target: any, id: number) {
   let isAnswered = false;
-    this.comments[id].isResolved = target.checked;
-    this.otherService.updateCommentsInDatabase(this.comments, this.route.snapshot.paramMap.get("id"));
-    this.comments.forEach(comment => {
-      if (comment.isResolved) {
-        isAnswered = true;
-      }
-    });
-    this.otherService.updateIsAnswered(isAnswered, this.route.snapshot.paramMap.get("id"));
+  this.comments[id].isResolved = target.checked;
+  this.otherService.updateCommentsInDatabase(this.comments, this.route.snapshot.paramMap.get('id'));
+  this.comments.forEach(comment => {
+    if (comment.isResolved) {
+      isAnswered = true;
+    }
+  });
+  this.otherService.updateIsAnswered(isAnswered, this.route.snapshot.paramMap.get('id'));
 }
-public dark = JSON.parse(localStorage.getItem('dark'));
 }
 

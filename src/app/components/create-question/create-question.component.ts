@@ -1,8 +1,8 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { OtherService } from "../../shared/services/other.service";
-import { AuthService } from "../../shared/services/auth.service";
-import { Router } from "@angular/router";
-import { Question } from "../../shared/services/question";
+import { OtherService } from '../../shared/services/other.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
+import { Question } from '../../shared/services/question';
 import { NgForm } from '@angular/forms';
 import * as moment from 'moment';
 
@@ -13,7 +13,6 @@ import * as moment from 'moment';
   styleUrls: ['./create-question.component.sass']
 })
 export class CreateQuestionComponent implements OnInit {
-  public now = moment().format('L');
   constructor(
     public otherService: OtherService,
     public authService: AuthService,
@@ -21,10 +20,11 @@ export class CreateQuestionComponent implements OnInit {
     public ngZone: NgZone
   ) { }
 
-  ngOnInit() {
-  }
+  public now = moment().format('L');
   public dark = JSON.parse(localStorage.getItem('dark'));
-  author = JSON.parse(localStorage.getItem('user')).email;
+  public author = JSON.parse(localStorage.getItem('user')).email;
+
+  ngOnInit() {}
 
   addQuestion(form: NgForm) {
     const newQuestion: Question = {
@@ -39,7 +39,8 @@ export class CreateQuestionComponent implements OnInit {
       isAnswered: false,
       comments: []
     };
-    this.otherService.createQuestion(newQuestion)
+
+    this.otherService.createQuestion(newQuestion);
   }
 
 }
